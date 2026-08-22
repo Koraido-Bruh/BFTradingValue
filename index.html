@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blox Fruits Value List</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #06060f;
+    --bg-alt: #0a0a18;
+    --surface: #0e0e20;
+    --surface-2: #13132a;
+    --border: #1e1e45;
+    --border-soft: #16163a;
+    --ink: #e8eaf6;
+    --ink-dim: #9095c0;
+    --ink-faint: #555880;
+    --orange: #ff7a1a;
+    --orange-bright: #ffab5c;
+    --orange-deep: #c2410c;
+    --ember: #ff3d1a;
+    /* neon accents */
+    --neon: #7c3aff;
+    --neon-bright: #a78bfa;
+    --neon-dim: rgba(124,58,255,0.18);
+    --cyan: #00d4ff;
+    --cyan-dim: rgba(0,212,255,0.15);
+    --pink: #ff2d6b;
+    --pink-dim: rgba(255,45,107,0.15);
+    --good: #00ffaa;
+    --good-dim: rgba(0,255,170,0.15);
+    --bad: #ff2d6b;
+    --warn: #ffcc00;
+    --blue: #00d4ff;
+    --radius: 10px;
+    --shadow: 0 10px 40px rgba(0,0,0,0.7);
+    --glow-neon: 0 0 20px rgba(124,58,255,0.5), 0 0 40px rgba(124,58,255,0.2);
+    --glow-cyan: 0 0 20px rgba(0,212,255,0.5), 0 0 40px rgba(0,212,255,0.2);
+    --glow-pink: 0 0 20px rgba(255,45,107,0.5), 0 0 40px rgba(255,45,107,0.2);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 600px at 20% -5%, rgba(124,58,255,0.12), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 85% 10%, rgba(0,212,255,0.08), transparent 55%),
+      radial-gradient(ellipse 500px 400px at 50% 80%, rgba(255,45,107,0.06), transparent 60%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    /* scanline overlay */
+    position:relative;
+  }
+  body::before{
+    content:''; pointer-events:none; position:fixed; inset:0; z-index:9999;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+  }
+  .display{font-family:'Orbitron',sans-serif; letter-spacing:0.04em; text-transform:uppercase;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+  button{font-family:inherit; cursor:pointer;}
+
+  /* Neon grid background lines */
+  @keyframes neonPulse{ 0%,100%{opacity:0.6;} 50%{opacity:1;} }
+  @keyframes glitch{
+    0%,94%,100%{transform:none; text-shadow: 0 0 20px var(--neon), 0 0 40px var(--neon);}
+    95%{transform:translateX(-3px); text-shadow: 3px 0 0 var(--cyan), -3px 0 0 var(--pink);}
+    97%{transform:translateX(3px); text-shadow: -3px 0 0 var(--cyan), 3px 0 0 var(--pink);}
+    99%{transform:translateX(-1px);}
+  }
+  @keyframes scanDown{ from{top:-100%;} to{top:200%;} }
+  @keyframes borderFlow{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+  }
+  @keyframes cardHoverGlow{
+    0%,100%{box-shadow: 0 0 10px rgba(124,58,255,0.3);}
+    50%{box-shadow: 0 0 25px rgba(124,58,255,0.6), 0 0 50px rgba(124,58,255,0.2);}
+  }
+
+  /* ===== Top bar ===== */
+  .topbar{
+    position:sticky; top:0; z-index:40;
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    padding:12px 28px;
+    background:rgba(6,6,15,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom:1px solid var(--border);
+    flex-wrap:wrap;
+  }
+  .topbar::after{
+    content:''; position:absolute; bottom:-1px; left:0; right:0; height:1px;
+    background: linear-gradient(90deg, transparent, var(--neon), var(--cyan), var(--neon), transparent);
+    background-size:200% 100%; animation:borderFlow 4s linear infinite;
+  }
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand-mark{
+    width:34px; height:34px; border-radius:6px;
+    background:linear-gradient(135deg, var(--neon), var(--cyan));
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Orbitron',sans-serif; color:#fff; font-size:14px; font-weight:900;
+    box-shadow: var(--glow-neon);
+  }
+  .brand-text .display{font-size:15px; color:var(--ink); line-height:1;}
+  .brand-text span{display:block; font-size:9px; color:var(--ink-faint); letter-spacing:0.18em; text-transform:uppercase; margin-top:3px;}
+  .topnav{display:flex; gap:14px; align-items:center; flex-wrap:wrap;}
+  .topnav a{
+    font-size:11px; font-weight:600; color:var(--ink-dim); text-decoration:none;
+    letter-spacing:0.1em; text-transform:uppercase; font-family:'Orbitron',sans-serif;
+    transition:color .15s;
+  }
+  .topnav a:hover{color:var(--cyan); text-shadow: 0 0 10px var(--cyan);}
+  .btn{
+    border:1px solid var(--border); background:var(--surface); color:var(--ink);
+    padding:9px 16px; border-radius:6px; font-size:12px; font-weight:600;
+    display:inline-flex; align-items:center; gap:6px; transition:all .15s ease;
+    letter-spacing:0.04em;
+  }
+  .btn:hover{border-color:var(--neon); color:var(--neon-bright); box-shadow: 0 0 12px rgba(124,58,255,0.3);}
+  .btn-primary{
+    background:linear-gradient(135deg, var(--neon), #5b21b6);
+    border:1px solid rgba(167,139,250,0.4); color:#fff; font-weight:700;
+    box-shadow: var(--glow-neon);
+  }
+  .btn-primary:hover{filter:brightness(1.15); box-shadow: 0 0 30px rgba(124,58,255,0.6);}
+  .btn-danger{border-color:rgba(255,45,107,0.4); color:var(--pink);}
+  .btn-danger:hover{border-color:var(--pink); background:var(--pink-dim); box-shadow: 0 0 12px rgba(255,45,107,0.3);}
+  .btn-sm{padding:6px 10px; font-size:11px; border-radius:5px;}
+  .btn-icon{padding:7px 9px;}
+  .btn[disabled]{opacity:0.4; cursor:not-allowed;}
+
+  /* ===== Account widget ===== */
+  .account-area{display:flex; align-items:center; gap:8px;}
+  .account-chip{
+    display:flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--border);
+    padding:5px 10px 5px 6px; border-radius:6px; font-size:12px;
+  }
+  .avatar{
+    width:24px; height:24px; border-radius:4px; display:flex; align-items:center; justify-content:center;
+    font-size:10px; font-weight:800; color:#fff; font-family:'Orbitron',sans-serif;
+  }
+  .avatar.admin{background:linear-gradient(135deg,var(--neon),var(--cyan)); box-shadow: var(--glow-neon);}
+  .avatar.user{background:linear-gradient(135deg,var(--cyan),#0088aa); box-shadow: var(--glow-cyan);}
+  .role-tag{font-size:9px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 6px; border-radius:3px; font-family:'Orbitron',sans-serif;}
+  .role-tag.admin{background:var(--neon-dim); color:var(--neon-bright); border:1px solid rgba(124,58,255,0.3);}
+  .role-tag.user{background:var(--cyan-dim); color:var(--cyan); border:1px solid rgba(0,212,255,0.3);}
+
+  /* ===== Ticker ===== */
+  .ticker-wrap{
+    border-bottom:1px solid var(--border);
+    background:var(--bg-alt);
+    overflow:hidden; white-space:nowrap; padding:8px 0;
+    position:relative;
+  }
+  .ticker-wrap::before{content:''; position:absolute; left:0; top:0; bottom:0; width:80px; background:linear-gradient(90deg,var(--bg-alt),transparent); z-index:1;}
+  .ticker-wrap::after{content:''; position:absolute; right:0; top:0; bottom:0; width:80px; background:linear-gradient(-90deg,var(--bg-alt),transparent); z-index:1;}
+  .ticker{display:inline-block; padding-left:100%; animation:scroll 32s linear infinite;}
+  .ticker-wrap:hover .ticker{animation-play-state:paused;}
+  @keyframes scroll{ from{transform:translateX(0);} to{transform:translateX(-100%);} }
+  .tick-item{display:inline-flex; align-items:center; gap:6px; margin-right:40px; font-size:11px; font-weight:600; color:var(--ink-dim); font-family:'JetBrains Mono',monospace; letter-spacing:0.04em;}
+  .tick-up{color:var(--good); text-shadow: 0 0 8px var(--good);}
+  .tick-down{color:var(--pink); text-shadow: 0 0 8px var(--pink);}
+
+  /* ===== Hero ===== */
+  .hero{
+    padding:70px 28px 48px; text-align:center; position:relative;
+    border-bottom:1px solid var(--border); overflow:hidden;
+  }
+  /* cyber grid lines */
+  .hero::before{
+    content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(124,58,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,58,255,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  /* scanning beam */
+  .hero::after{
+    content:''; position:absolute; left:0; right:0; height:2px; z-index:1; pointer-events:none;
+    background:linear-gradient(90deg, transparent, var(--neon), var(--cyan), var(--neon), transparent);
+    animation: scanDown 6s linear infinite; opacity:0.4;
+  }
+  .hero > *{position:relative; z-index:2;}
+  .hero-eyebrow{
+    display:inline-flex; align-items:center; gap:8px; font-size:10px; font-weight:700;
+    letter-spacing:0.2em; text-transform:uppercase; color:var(--cyan);
+    background:var(--cyan-dim); border:1px solid rgba(0,212,255,0.3);
+    padding:6px 14px; border-radius:3px; margin-bottom:22px;
+    font-family:'Orbitron',sans-serif;
+  }
+  .hero-eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--good); box-shadow:0 0 10px var(--good); animation:neonPulse 2s ease infinite;}
+  .hero h1{
+    font-size:clamp(28px,5.5vw,62px); margin:0 0 14px; line-height:1;
+    font-family:'Orbitron',sans-serif; font-weight:900; letter-spacing:0.04em;
+    color:var(--ink);
+    animation: glitch 8s ease-in-out infinite;
+    text-shadow: 0 0 20px var(--neon), 0 0 40px var(--neon);
+  }
+  .hero h1 em{font-style:normal; color:var(--cyan); text-shadow: 0 0 20px var(--cyan), 0 0 60px var(--cyan);}
+  .hero p{max-width:540px; margin:0 auto; color:var(--ink-dim); font-size:14px; line-height:1.7;}
+  .hero-stats{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:36px;}
+  .stat{
+    background:var(--surface); border:1px solid var(--border); border-radius:6px;
+    padding:16px 24px; min-width:130px; position:relative; overflow:hidden;
+  }
+  .stat::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:1px;
+    background:linear-gradient(90deg, transparent, var(--neon), transparent);
+  }
+  .stat .num{font-family:'Orbitron',sans-serif; font-size:22px; font-weight:800; color:var(--neon-bright); text-shadow: 0 0 15px var(--neon);}
+  .stat .lbl{font-size:9px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.14em; margin-top:4px; font-family:'Orbitron',sans-serif;}
+
+  /* ===== Section ===== */
+  .section{max-width:1240px; margin:0 auto; padding:48px 28px;}
+  .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:22px; flex-wrap:wrap;}
+  .section-head h2{
+    font-size:20px; margin:0 0 4px; display:flex; align-items:center; gap:12px;
+    font-family:'Orbitron',sans-serif; font-weight:800; letter-spacing:0.06em;
+    color:var(--ink);
+  }
+  .section-head .index{color:var(--neon-bright); font-size:12px; opacity:0.7;}
+  .section-head p{margin:0; color:var(--ink-faint); font-size:13px;}
+
+  /* Neon section divider */
+  .section + .section{ border-top:1px solid var(--border); }
+
+  .admin-note{
+    display:flex; align-items:center; gap:8px; font-size:11px; color:var(--ink-faint);
+    background:var(--neon-dim); border:1px solid rgba(124,58,255,0.25); border-radius:6px; padding:8px 12px; margin-bottom:16px;
+  }
+  .admin-note a, .admin-note button.link{background:none; border:none; color:var(--cyan); font-weight:700; padding:0; text-decoration:underline; font-size:11px;}
+
+  /* ===== Toolbar ===== */
+  .toolbar{
+    display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:20px;
+    background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:12px;
+  }
+  .search-box{position:relative; flex:1; min-width:200px;}
+  .search-box input{
+    width:100%; padding:10px 12px 10px 34px; border-radius:5px; border:1px solid var(--border);
+    background:var(--bg-alt); color:var(--ink); font-size:13px; outline:none; transition:border-color .15s;
+  }
+  .search-box input:focus{border-color:var(--neon); box-shadow: 0 0 10px rgba(124,58,255,0.2);}
+  .search-box svg{position:absolute; left:11px; top:50%; transform:translateY(-50%); opacity:0.4; color:var(--neon-bright);}
+  select, .toolbar input[type=text]{
+    padding:10px 10px; border-radius:5px; border:1px solid var(--border);
+    background:var(--bg-alt); color:var(--ink); font-size:12px; outline:none; transition:border-color .15s;
+  }
+  select:focus, .toolbar input[type=text]:focus{border-color:var(--neon);}
+  .count-pill{
+    font-size:10px; color:var(--neon-bright); padding:3px 10px; white-space:nowrap;
+    background:var(--neon-dim); border:1px solid rgba(124,58,255,0.3); border-radius:3px;
+    font-family:'Orbitron',sans-serif; letter-spacing:0.06em;
+  }
+
+  /* ===== Grid ===== */
+  .grid{
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px;
+  }
+  .card{
+    background:var(--surface); border:1px solid var(--border); border-radius:8px;
+    padding:16px; position:relative; overflow:hidden;
+    transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  /* animated neon top border */
+  .card::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:2px;
+    background:linear-gradient(90deg, var(--neon), var(--cyan), var(--neon));
+    background-size:200% 100%; animation:borderFlow 3s linear infinite; opacity:0.8;
+  }
+  /* corner accent */
+  .card::after{
+    content:''; position:absolute; bottom:0; right:0; width:20px; height:20px; pointer-events:none;
+    border-right:2px solid rgba(0,212,255,0.3); border-bottom:2px solid rgba(0,212,255,0.3);
+  }
+  .card:hover{
+    transform:translateY(-4px);
+    border-color:rgba(124,58,255,0.5);
+    box-shadow: 0 0 20px rgba(124,58,255,0.25), 0 8px 30px rgba(0,0,0,0.5);
+  }
+  .card-media{
+    width:100%; aspect-ratio:1/1; border-radius:6px; margin-bottom:12px; overflow:hidden;
+    background:var(--bg-alt); display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--border);
+  }
+  .card-media img{width:100%; height:100%; object-fit:contain; padding:8px;}
+  .card-media .placeholder{font-family:'Orbitron',sans-serif; font-size:22px; color:var(--border); font-weight:900;}
+  .card-top{display:flex; align-items:flex-start; justify-content:space-between; gap:8px; margin-bottom:10px;}
+  .badge{
+    font-size:8.5px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+    padding:3px 8px; border-radius:3px; border:1px solid transparent; white-space:nowrap;
+    font-family:'Orbitron',sans-serif;
+  }
+  .badge-Limited{background:rgba(255,45,107,0.14); color:var(--pink); border-color:rgba(255,45,107,0.35); box-shadow: 0 0 8px rgba(255,45,107,0.2);}
+  .badge-Gamepass{background:var(--cyan-dim); color:var(--cyan); border-color:rgba(0,212,255,0.3);}
+  .badge-Mythical{background:rgba(255,45,107,0.14); color:#ff8a72; border-color:rgba(255,45,107,0.35);}
+  .badge-Legendary{background:rgba(255,204,0,0.12); color:#ffcc00; border-color:rgba(255,204,0,0.35); box-shadow: 0 0 8px rgba(255,204,0,0.2);}
+  .badge-Rare{background:var(--neon-dim); color:var(--neon-bright); border-color:rgba(124,58,255,0.35); box-shadow: 0 0 8px rgba(124,58,255,0.2);}
+  .badge-Uncommon{background:var(--good-dim); color:var(--good); border-color:rgba(0,255,170,0.3);}
+  .badge-Common{background:rgba(100,100,150,0.12); color:var(--ink-dim); border-color:rgba(100,100,150,0.25);}
+  .card-name{font-size:15px; font-weight:700; line-height:1.2; margin:0; font-family:'Orbitron',sans-serif; letter-spacing:0.03em;}
+  .card-actions{display:flex; gap:5px; opacity:0; transition:opacity .15s ease;}
+  .card:hover .card-actions{opacity:1;}
+  .icon-btn{
+    width:24px; height:24px; border-radius:4px; border:1px solid var(--border);
+    background:var(--bg-alt); display:flex; align-items:center; justify-content:center; color:var(--ink-dim);
+    transition:all .12s;
+  }
+  .icon-btn:hover{border-color:var(--neon); color:var(--neon-bright); box-shadow: 0 0 8px rgba(124,58,255,0.4);}
+  .icon-btn.del:hover{border-color:var(--pink); color:var(--pink); box-shadow: 0 0 8px rgba(255,45,107,0.4);}
+  .val-rows{display:flex; flex-direction:column; gap:7px; margin-bottom:12px;}
+  .val-row{display:flex; align-items:center; justify-content:space-between; font-size:12px;}
+  .val-row .k{color:var(--ink-faint); font-weight:600; font-size:10px; letter-spacing:0.06em; text-transform:uppercase;}
+  .val-row .v{font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--ink);}
+  .val-row.perm .v{color:var(--cyan); text-shadow: 0 0 8px var(--cyan);}
+  .card-foot{display:flex; align-items:center; justify-content:space-between; padding-top:10px; border-top:1px solid rgba(124,58,255,0.15);}
+  .demand-tag{font-size:10px; font-weight:700; font-family:'Orbitron',sans-serif; letter-spacing:0.06em;}
+  .demand-Very-High{color:var(--pink); text-shadow: 0 0 8px var(--pink);}
+  .demand-High{color:var(--orange-bright);}
+  .demand-Medium{color:var(--warn);}
+  .demand-Low{color:var(--cyan);}
+  .demand-Very-Low{color:var(--ink-faint);}
+  .trend{font-size:10px; font-weight:700; display:flex; align-items:center; gap:3px; font-family:'Orbitron',sans-serif;}
+  .trend-Overpaid{color:var(--pink);}
+  .trend-Underpaid{color:var(--good); text-shadow: 0 0 8px var(--good);}
+  .trend-Stable{color:var(--ink-faint);}
+
+  .empty-state{grid-column:1/-1; text-align:center; padding:60px 20px; color:var(--ink-faint); font-family:'Orbitron',sans-serif; font-size:12px; letter-spacing:0.1em;}
+
+  /* ===== Calculator (cyberpunk) ===== */
+  .calc-wrap{
+    background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:22px;
+    position:relative; overflow:hidden;
+  }
+  .calc-wrap::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:2px;
+    background:linear-gradient(90deg, var(--neon), var(--cyan), var(--pink), var(--neon));
+    background-size:200% 100%; animation:borderFlow 3s linear infinite;
+  }
+  .calc-cols{display:grid; grid-template-columns:1fr auto 1fr; gap:18px; align-items:stretch;}
+  @media (max-width: 820px){ .calc-cols{grid-template-columns:1fr;} }
+  .calc-side{
+    background:var(--bg-alt); border:1px solid var(--border); border-radius:6px; padding:16px;
+    display:flex; flex-direction:column; min-height:300px; position:relative;
+  }
+  .calc-side.you{border-top:2px solid var(--neon);}
+  .calc-side.them{border-top:2px solid var(--cyan);}
+  .calc-side h3{margin:0 0 12px; font-size:11px; display:flex; align-items:center; gap:8px; font-family:'Orbitron',sans-serif; letter-spacing:0.1em; text-transform:uppercase;}
+  .calc-side.you h3{color:var(--neon-bright);}
+  .calc-side.them h3{color:var(--cyan);}
+  .calc-list{flex:1; display:flex; flex-direction:column; gap:6px; overflow-y:auto; max-height:200px; padding-right:2px;}
+  .calc-list::-webkit-scrollbar{width:4px;} .calc-list::-webkit-scrollbar-thumb{background:var(--neon); border-radius:4px; opacity:0.5;}
+  .calc-line{
+    display:flex; align-items:center; justify-content:space-between; background:var(--surface); border:1px solid var(--border);
+    border-radius:5px; padding:7px 9px; font-size:12px;
+  }
+  .calc-line .name{font-weight:600; font-size:11px;}
+  .calc-line .qty{color:var(--ink-faint); font-size:10px; margin-left:4px;}
+  .calc-line .amt{font-family:'JetBrains Mono',monospace; color:var(--cyan); font-weight:700; margin-right:8px; text-shadow: 0 0 6px var(--cyan);}
+  .calc-line button{background:none; border:none; color:var(--ink-faint); font-size:15px; line-height:1; transition:color .12s;}
+  .calc-line button:hover{color:var(--pink); text-shadow: 0 0 8px var(--pink);}
+  .calc-total{margin-top:12px; padding-top:12px; border-top:1px solid rgba(124,58,255,0.2); display:flex; justify-content:space-between; align-items:baseline;}
+  .calc-total .lbl{font-size:9px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.1em; font-family:'Orbitron',sans-serif;}
+  .calc-total .amt{font-family:'Orbitron',sans-serif; font-size:20px; font-weight:800; color:var(--neon-bright); text-shadow: 0 0 12px var(--neon);}
+  .calc-vs{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:0 4px;}
+  .vs-badge{
+    width:46px; height:46px; border-radius:6px;
+    background:linear-gradient(135deg, var(--neon), var(--cyan));
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Orbitron',sans-serif; color:#fff; font-size:11px; font-weight:900;
+    box-shadow: var(--glow-neon); animation: neonPulse 2s ease infinite;
+  }
+  .verdict{
+    text-align:center; padding:10px 14px; border-radius:5px; font-size:10px; font-weight:700;
+    letter-spacing:0.08em; border:1px solid var(--border); white-space:nowrap;
+    font-family:'Orbitron',sans-serif; text-transform:uppercase;
+  }
+  .verdict-fair{background:var(--good-dim); color:var(--good); border-color:rgba(0,255,170,0.35); box-shadow: 0 0 15px rgba(0,255,170,0.2);}
+  .verdict-you-lose{background:var(--pink-dim); color:var(--pink); border-color:rgba(255,45,107,0.35); box-shadow: 0 0 15px rgba(255,45,107,0.2);}
+  .verdict-you-win{background:var(--cyan-dim); color:var(--cyan); border-color:rgba(0,212,255,0.35); box-shadow: 0 0 15px rgba(0,212,255,0.2);}
+  .calc-search-row{display:flex; gap:8px; margin-bottom:10px;}
+  .calc-search-row input{
+    flex:1; background:var(--bg-alt); border:1px solid var(--border); border-radius:5px;
+    color:var(--ink); padding:9px 13px; font-size:13px; font-family:inherit; outline:none; transition:border-color .15s, box-shadow .15s;
+  }
+  .calc-search-row input:focus{border-color:var(--neon); box-shadow: 0 0 12px rgba(124,58,255,0.25);}
+  .calc-fruit-grid{
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(76px,1fr));
+    gap:6px; max-height:190px; overflow-y:auto; padding-right:3px; margin-bottom:14px;
+  }
+  .calc-fruit-grid::-webkit-scrollbar{width:4px;} .calc-fruit-grid::-webkit-scrollbar-thumb{background:var(--neon); border-radius:4px;}
+  .calc-fruit-btn{
+    display:flex; flex-direction:column; align-items:center; gap:4px;
+    background:var(--bg-alt); border:1px solid var(--border); border-radius:6px;
+    padding:8px 4px; cursor:pointer; transition:all .15s;
+    font-size:10px; text-align:center; color:var(--ink-dim); font-family:inherit;
+    position:relative; overflow:hidden;
+  }
+  .calc-fruit-btn::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:1px;
+    background:linear-gradient(90deg, transparent, var(--neon), transparent); opacity:0;
+    transition:opacity .15s;
+  }
+  .calc-fruit-btn:hover{border-color:rgba(124,58,255,0.6); background:var(--neon-dim); box-shadow: 0 0 12px rgba(124,58,255,0.2);}
+  .calc-fruit-btn:hover::before{opacity:1;}
+  .calc-fruit-btn img{width:38px; height:38px; object-fit:contain; border-radius:4px;}
+  .calc-fruit-placeholder{width:38px; height:38px; display:flex; align-items:center; justify-content:center;
+    font-family:'Orbitron',sans-serif; font-size:14px; color:var(--border); background:var(--surface-2); border-radius:4px; font-weight:900;}
+  .calc-fruit-name{font-size:8.5px; color:var(--ink-dim); line-height:1.2; max-width:72px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .calc-fruit-val{color:var(--cyan); font-size:9px; font-weight:700; text-shadow: 0 0 6px var(--cyan);}
+  .calc-fair-wrap{margin-top:14px;}
+  .calc-fair-bar{height:6px; border-radius:0; background:var(--bg-alt); border:1px solid var(--border); overflow:hidden;}
+  .calc-fair-fill{height:100%; transition:width .4s ease, background .4s ease;}
+  .calc-fair-label{font-size:9px; color:var(--ink-faint); margin-top:5px; text-align:center; font-family:'Orbitron',sans-serif; letter-spacing:0.1em;}
+
+  /* ===== Calc slots ===== */
+  .calc-slots{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px; flex:1;}
+  .calc-slot{
+    aspect-ratio:1; border-radius:8px; border:1px solid var(--border);
+    background:var(--bg-alt); display:flex; flex-direction:column; align-items:center;
+    justify-content:center; position:relative; overflow:hidden; cursor:pointer;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .calc-slot.empty{border-style:dashed;}
+  .calc-slot.empty:hover{border-color:var(--neon); box-shadow:0 0 12px rgba(124,58,255,0.3);}
+  .calc-slot.empty::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:1px;
+    background:linear-gradient(90deg, transparent, var(--neon), transparent); opacity:0;
+    transition:opacity .15s;
+  }
+  .calc-slot.empty:hover::before{opacity:1;}
+  .slot-plus{
+    width:32px; height:32px; border-radius:6px; border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    font-size:20px; color:var(--ink-faint); margin-bottom:4px;
+    background:var(--surface); transition:all .15s;
+  }
+  .calc-slot.empty:hover .slot-plus{border-color:var(--neon); color:var(--neon-bright); box-shadow:0 0 8px rgba(124,58,255,0.4);}
+  .slot-label{font-size:8.5px; color:var(--ink-faint); font-family:'Orbitron',sans-serif; letter-spacing:0.08em;}
+
+  /* Filled slot */
+  .calc-slot.filled{border-color:rgba(124,58,255,0.4); border-style:solid; cursor:default;}
+  .calc-slot.filled::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:2px;
+    background:linear-gradient(90deg, var(--neon), var(--cyan)); opacity:0.8;
+  }
+  .slot-img{width:58%; height:58%; object-fit:contain; border-radius:6px;}
+  .slot-name{font-size:8px; color:var(--ink-dim); text-align:center; padding:0 4px; line-height:1.3; font-weight:600; margin-top:3px; max-width:90%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .slot-val{font-size:8px; color:var(--cyan); font-family:'JetBrains Mono',monospace; font-weight:700;}
+  .slot-remove{
+    position:absolute; top:4px; right:4px; width:16px; height:16px; border-radius:3px;
+    background:rgba(255,45,107,0.2); border:1px solid rgba(255,45,107,0.4); color:var(--pink);
+    font-size:10px; line-height:1; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:all .12s; opacity:0;
+  }
+  .calc-slot.filled:hover .slot-remove{opacity:1;}
+  .slot-qty-row{display:flex; align-items:center; gap:3px; margin-top:2px;}
+  .slot-qty-btn{
+    width:14px; height:14px; border-radius:2px; border:1px solid var(--border);
+    background:var(--bg); color:var(--ink-dim); font-size:10px; line-height:1;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .12s;
+  }
+  .slot-qty-btn:hover{border-color:var(--neon); color:var(--neon-bright);}
+  .slot-qty{font-size:9px; color:var(--ink); font-family:'JetBrains Mono',monospace; min-width:14px; text-align:center;}
+
+  /* ===== Fruit picker modal ===== */
+  .calc-picker-overlay{
+    position:fixed; inset:0; background:rgba(4,4,12,0.9); backdrop-filter:blur(8px);
+    display:none; align-items:center; justify-content:center; z-index:200; padding:16px;
+  }
+  .calc-picker-overlay.open{display:flex;}
+  .calc-picker-modal{
+    background:var(--surface); border:1px solid var(--neon); border-radius:10px;
+    width:100%; max-width:560px; max-height:80vh; display:flex; flex-direction:column;
+    box-shadow: var(--glow-neon), 0 20px 60px rgba(0,0,0,0.8);
+    overflow:hidden;
+  }
+  .calc-picker-head{
+    display:flex; align-items:center; justify-content:space-between; padding:14px 16px;
+    border-bottom:1px solid var(--border); flex-shrink:0;
+  }
+  #calcPickerSearch{
+    width:100%; padding:10px 14px; border:none; border-bottom:1px solid var(--border);
+    background:var(--bg-alt); color:var(--ink); font-size:13px; font-family:inherit;
+    outline:none; flex-shrink:0;
+  }
+  #calcPickerSearch:focus{border-bottom-color:var(--neon);}
+  .calc-picker-grid{
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(90px,1fr));
+    gap:8px; padding:14px; overflow-y:auto; flex:1;
+  }
+  .calc-picker-grid::-webkit-scrollbar{width:5px;} .calc-picker-grid::-webkit-scrollbar-thumb{background:var(--neon); border-radius:4px;}
+  .picker-item{
+    display:flex; flex-direction:column; align-items:center; gap:5px;
+    background:var(--bg-alt); border:1px solid var(--border); border-radius:8px;
+    padding:10px 6px; cursor:pointer; transition:all .15s; text-align:center;
+    position:relative; overflow:hidden;
+  }
+  .picker-item::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:1px;
+    background:linear-gradient(90deg, transparent, var(--neon), transparent); opacity:0;
+    transition:opacity .15s;
+  }
+  .picker-item:hover{border-color:rgba(124,58,255,0.6); background:var(--neon-dim); box-shadow:0 0 12px rgba(124,58,255,0.2);}
+  .picker-item:hover::before{opacity:1;}
+  .picker-item img{width:52px; height:52px; object-fit:contain; border-radius:6px;}
+  .picker-item-placeholder{width:52px; height:52px; display:flex; align-items:center; justify-content:center; background:var(--surface-2); border-radius:6px; font-family:'Orbitron',sans-serif; font-size:18px; color:var(--border); font-weight:900;}
+  .picker-item-name{font-size:9px; color:var(--ink-dim); font-weight:600; line-height:1.2; max-width:80px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .picker-item-val{font-size:8.5px; color:var(--cyan); font-family:'JetBrains Mono',monospace; font-weight:700;}
+  .picker-item-badge{font-size:7.5px; color:var(--ink-faint); font-family:'Orbitron',sans-serif; text-transform:uppercase; letter-spacing:0.06em;}
+
+  .calc-empty-msg{color:var(--ink-faint); font-size:11px; text-align:center; padding:20px 0; font-family:'Orbitron',sans-serif; letter-spacing:0.06em; opacity:0.6; grid-column:1/-1;}
+
+  /* ===== Modal ===== */
+  .overlay{
+    position:fixed; inset:0; background:rgba(4,4,12,0.85); backdrop-filter:blur(6px);
+    display:none; align-items:center; justify-content:center; z-index:100; padding:20px;
+  }
+  .overlay.open{display:flex;}
+  .modal{
+    background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:26px;
+    width:100%; max-width:440px; box-shadow: 0 0 40px rgba(124,58,255,0.3), var(--shadow);
+    max-height:90vh; overflow-y:auto; position:relative;
+  }
+  .modal::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:2px; border-radius:8px 8px 0 0;
+    background:linear-gradient(90deg, var(--neon), var(--cyan), var(--neon));
+    background-size:200% 100%; animation:borderFlow 3s linear infinite;
+  }
+  .modal h3{margin:0 0 6px; font-size:16px; font-family:'Orbitron',sans-serif; letter-spacing:0.06em;}
+  .modal .sub{font-size:11px; color:var(--ink-faint); margin-bottom:18px; letter-spacing:0.04em;}
+  .field{margin-bottom:14px;}
+  .field label{
+    display:block; font-size:9px; font-weight:700; color:var(--neon-bright);
+    text-transform:uppercase; letter-spacing:0.12em; margin-bottom:6px; font-family:'Orbitron',sans-serif;
+  }
+  .field input, .field select{
+    width:100%; padding:10px 12px; border-radius:5px; border:1px solid var(--border);
+    background:var(--bg-alt); color:var(--ink); font-size:13px; outline:none; transition:border-color .15s, box-shadow .15s;
+  }
+  .field input:focus, .field select:focus{border-color:var(--neon); box-shadow: 0 0 12px rgba(124,58,255,0.2);}
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  .field small{display:block; color:var(--ink-faint); font-size:10px; margin-top:5px;}
+  .modal-actions{display:flex; justify-content:flex-end; gap:8px; margin-top:20px;}
+  .img-preview{
+    width:100%; height:120px; border-radius:6px; background:var(--bg-alt); border:1px dashed rgba(124,58,255,0.3);
+    display:flex; align-items:center; justify-content:center; overflow:hidden; margin-bottom:10px; color:var(--ink-faint); font-size:11px;
+  }
+  .img-preview img{width:100%; height:100%; object-fit:cover;}
+  .img-row{display:flex; gap:8px;}
+  .img-row input[type=text]{flex:1;}
+  .file-btn{position:relative; overflow:hidden;}
+  .file-btn input[type=file]{position:absolute; inset:0; opacity:0; cursor:pointer;}
+
+  .tabs{display:flex; gap:4px; background:var(--bg-alt); border:1px solid var(--border); border-radius:6px; padding:4px; margin-bottom:18px;}
+  .tab-btn{
+    flex:1; border:none; background:none; color:var(--ink-faint); padding:8px; border-radius:4px;
+    font-size:10px; font-weight:700; font-family:'Orbitron',sans-serif; letter-spacing:0.08em; text-transform:uppercase;
+    transition:all .15s;
+  }
+  .tab-btn.active{background:var(--neon-dim); color:var(--neon-bright); border:1px solid rgba(124,58,255,0.3);}
+  .auth-error{
+    background:var(--pink-dim); border:1px solid rgba(255,45,107,0.35); color:var(--pink);
+    font-size:11px; padding:8px 10px; border-radius:5px; margin-bottom:12px; display:none;
+  }
+  .auth-error.show{display:block;}
+  .pw-hint{font-size:10px; color:var(--ink-faint); margin-top:5px;}
+
+  .toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px); opacity:0;
+    background:var(--surface); border:1px solid var(--neon); color:var(--ink); padding:11px 22px;
+    border-radius:5px; font-size:12px; font-weight:600; z-index:200; transition:all .25s ease;
+    box-shadow: var(--glow-neon); max-width:90vw; text-align:center;
+    font-family:'Orbitron',sans-serif; letter-spacing:0.06em;
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  footer{
+    text-align:center; padding:36px 20px 50px; color:var(--ink-faint); font-size:10px;
+    border-top:1px solid var(--border); font-family:'Orbitron',sans-serif; letter-spacing:0.08em;
+  }
+  footer .foot-actions{margin-top:12px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;}
+
+  @media (max-width:640px){
+    .topnav a{display:none;}
+    .hero{padding:50px 18px 30px;}
+    .section{padding:34px 16px;}
+    .hero h1{font-size:clamp(22px,7vw,40px);}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-mark">BF</div>
+    <div class="brand-text">
+      <div class="display">Blox Values</div>
+      <span>Fan-made trading board</span>
+    </div>
+  </div>
+  <nav class="topnav">
+    <a href="#values">Value List</a>
+    <a href="#calculator">Calculator</a>
+    <button class="btn btn-primary btn-sm" id="openAddBtn" style="display:none;">+ Add Item</button>
+    <div class="account-area" id="accountArea"></div>
+  </nav>
+</div>
+
+<div class="ticker-wrap">
+  <div class="ticker" id="tickerEl"></div>
+</div>
+
+<section class="hero">
+  <div class="hero-eyebrow"><span class="dot"></span> Live community value board</div>
+  <h1 class="display">Blox Fruits <em>Value</em> List</h1>
+  <p style="font-size:11px; color:var(--neon-bright); letter-spacing:0.18em; text-transform:uppercase; font-family:'Orbitron',sans-serif; margin-bottom:6px; opacity:0.7;">Made By Tuva Values</p>
+  <p>Every fruit, gamepass and limited item with its Normal and Permanent trade value. Search, sort, check any deal in the calculator — sign in to add photos or edit values.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="num" id="statCount">—</div><div class="lbl">Items tracked</div></div>
+    <div class="stat"><div class="num" id="statTop">—</div><div class="lbl">Top value</div></div>
+    <div class="stat"><div class="num" id="statTopName">—</div><div class="lbl">Most valuable</div></div>
+  </div>
+</section>
+
+<section class="section" id="values">
+  <div class="section-head">
+    <div>
+      <h2><span class="index display">01</span> Value List</h2>
+      <p>Browse and search freely. Editing is restricted to the admin account.</p>
+    </div>
+  </div>
+
+  <div class="admin-note" id="adminNote"></div>
+
+  <div class="toolbar">
+    <div class="search-box">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="Search items…">
+    </div>
+    <select id="categoryFilter"><option value="">All categories</option></select>
+    <select id="demandFilter"><option value="">All demand</option></select>
+    <select id="sortSelect">
+      <option value="value-desc">Value: High to Low</option>
+      <option value="value-asc">Value: Low to High</option>
+      <option value="name-asc">Name: A to Z</option>
+      <option value="name-desc">Name: Z to A</option>
+    </select>
+    <span class="count-pill" id="resultCount"></span>
+  </div>
+
+  <div class="grid" id="itemGrid"></div>
+</section>
+
+<section class="section" id="calculator">
+  <div class="section-head">
+    <div>
+      <h2><span class="index display">02</span> Trade Calculator</h2>
+      <p>Click <strong>+</strong> in any slot to pick a fruit. Up to 4 fruits per side.</p>
+    </div>
+  </div>
+
+  <div class="calc-wrap">
+    <div class="calc-cols">
+
+      <!-- YOUR SIDE -->
+      <div class="calc-side you">
+        <h3>🟠 Your Offer</h3>
+        <div class="calc-slots" id="youSlots"></div>
+        <div class="calc-total"><span class="lbl">Total</span><span class="amt" id="youTotal">0</span></div>
+      </div>
+
+      <!-- VS / VERDICT -->
+      <div class="calc-vs">
+        <div class="vs-badge">VS</div>
+        <div class="verdict" id="verdict">Add items to compare</div>
+        <div class="calc-fair-wrap" id="fairWrap" style="display:none;">
+          <div class="calc-fair-bar"><div class="calc-fair-fill" id="fairFill"></div></div>
+          <div class="calc-fair-label" id="fairLabel"></div>
+        </div>
+        <button class="btn btn-sm btn-danger" id="calcClearBtn" style="margin-top:12px; font-size:10px; width:100%;">✕ Clear all</button>
+      </div>
+
+      <!-- THEIR SIDE -->
+      <div class="calc-side them">
+        <h3>🔵 Their Offer</h3>
+        <div class="calc-slots" id="themSlots"></div>
+        <div class="calc-total"><span class="lbl">Total</span><span class="amt" id="themTotal">0</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Fruit picker modal -->
+  <div class="calc-picker-overlay" id="calcPickerOverlay">
+    <div class="calc-picker-modal">
+      <div class="calc-picker-head">
+        <span class="display" style="font-size:12px; color:var(--neon-bright); letter-spacing:0.1em;">SELECT FRUIT</span>
+        <button id="calcPickerClose" style="background:none;border:none;color:var(--ink-faint);font-size:20px;cursor:pointer;line-height:1;">✕</button>
+      </div>
+      <input type="text" id="calcPickerSearch" placeholder="🔍 Search…" autocomplete="off">
+      <div class="calc-picker-grid" id="calcPickerGrid"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Fan-made value tracker inspired by community trading boards. Not affiliated with Roblox Corporation or the Blox Fruits developers.
+  <div class="foot-actions">
+    <button class="btn btn-sm" id="resetDataBtn" style="display:none;">Reset to default values</button>
+  </div>
+</footer>
+
+<!-- Auth modal -->
+<div class="overlay" id="authOverlay">
+  <div class="modal">
+    <h3>Account</h3>
+    <div class="sub">Log in or create a free account to join the board.</div>
+    <div class="tabs">
+      <button class="tab-btn active" id="tabLogin">Log in</button>
+      <button class="tab-btn" id="tabRegister">Register</button>
+    </div>
+
+    <div class="auth-error" id="authError"></div>
+
+    <div id="loginPane">
+      <div class="field">
+        <label>Email or User</label>
+        <input type="text" id="loginEmail" placeholder="you@example.com or admin">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="loginPassword" placeholder="••••••••">
+      </div>
+      <div class="modal-actions">
+        <button class="btn" id="authCancelBtn">Cancel</button>
+        <button class="btn btn-primary" id="loginBtn">Log in</button>
+      </div>
+    </div>
+
+    <div id="registerPane" style="display:none;">
+      <div class="field">
+        <label>Username</label>
+        <input type="text" id="regUsername" placeholder="e.g. BloxKing99" autocomplete="off">
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="regEmail" placeholder="you@example.com">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="regPassword" placeholder="At least 8 characters">
+        <div class="pw-hint">Use 8+ characters. Your password is hashed before it's ever stored.</div>
+      </div>
+      <div class="field">
+        <label>Confirm password</label>
+        <input type="password" id="regPassword2" placeholder="••••••••">
+      </div>
+      <div class="modal-actions">
+        <button class="btn" id="authCancelBtn2">Cancel</button>
+        <button class="btn btn-primary" id="registerBtn">Create account</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add/Edit item modal (admin only) -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h3 id="modalTitle">Add Item</h3>
+    <div class="sub">Admin only — changes are visible to everyone on the board.</div>
+
+    <div class="field">
+      <label>Item image</label>
+      <div class="img-preview" id="imgPreview">No image</div>
+      <div class="img-row">
+        <input type="text" id="fImageUrl" placeholder="Paste image URL…">
+        <button class="btn btn-sm file-btn">Upload
+          <input type="file" id="fImageFile" accept="image/*">
+        </button>
+      </div>
+      <small>Paste a link, or upload a photo from your device (it's auto-compressed and stored with the item).</small>
+    </div>
+
+    <div class="field">
+      <label>Name</label>
+      <input type="text" id="fName" placeholder="e.g. Dragon East">
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Category</label>
+        <select id="fCategory">
+          <option>Limited</option><option>Gamepass</option><option>Mythical</option>
+          <option>Legendary</option><option>Rare</option><option>Uncommon</option><option>Common</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Demand</label>
+        <select id="fDemand">
+          <option>Very High</option><option>High</option><option>Medium</option><option>Low</option><option>Very Low</option>
+        </select>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Normal value</label>
+        <input type="text" id="fNormal" placeholder="e.g. 4.5B or 4500000000">
+      </div>
+      <div class="field">
+        <label>Permanent value</label>
+        <input type="text" id="fPerm" placeholder="e.g. 7.6B (leave blank if none)">
+      </div>
+    </div>
+    <div class="field">
+      <label>Trend</label>
+      <select id="fTrend"><option>Stable</option><option>Overpaid</option><option>Underpaid</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" id="cancelBtn">Cancel</button>
+      <button class="btn btn-primary" id="saveBtn">Save item</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================================
+   DATA
+   ========================================================================= */
+const DEFAULT_ITEMS = [
+["3x Mythical Scroll","Limited",1070000000,null,"Medium","Stable"],
+["5x Legendary Scroll","Limited",620000000,null,"Low","Stable"],
+["Dog Blade","Limited",400000000,null,"Very High","Stable"],
+["DogHouse Frame Break","Limited",null,null,"Very High","Stable"],
+["Rabid Skin","Limited",null,null,"Very High","Stable"],
+["Eclipse Chromatic","Limited",30000000000,null,"Very High","Stable"],
+["Galaxy Kitsune","Limited",11760000000,null,"Very High","Stable"],
+["Crimson Kitsune","Limited",8070000000,null,"Very High","Stable"],
+["Ember Dragon","Limited",6820000000,null,"Very High","Stable"],
+["Meme Fruit","Limited",5660000000,null,"High","Stable"],
+["Purple Lightning","Limited",5130000000,null,"Very High","Overpaid"],
+["West Dragon","Mythical",4800000000,7630000000,"Very High","Overpaid"],
+["Fruit Notifier","Gamepass",4550000000,null,"Very High","Stable"],
+["East Dragon","Mythical",4250000000,7630000000,"Very High","Overpaid"],
+["Super Spirit Pain","Limited",3020000000,null,"Very High","Overpaid"],
+["Red Lightning","Limited",2570000000,null,"Very High","Stable"],
+["Yellow Lightning","Limited",1690000000,null,"Very High","Stable"],
+["Divine Portal","Limited",1400000000,null,"Very High","Stable"],
+["Dark Blade","Gamepass",1130000000,null,"Very High","Stable"],
+["Werewolf","Limited",925000000,null,"High","Stable"],
+["Celestial Pain","Limited",917500000,null,"High","Stable"],
+["Fiend Yeti","Legendary",830000000,null,"High","Stable"],
+["Frustration Pain","Limited",817500000,null,"High","Stable"],
+["Sadness Pain","Limited",732500000,null,"High","Stable"],
+["Kitsune","Mythical",622500000,6450000000,"Very High","Overpaid"],
+["Azura Bomb","Limited",477500000,null,"Medium","Stable"],
+["Nuclear Bomb","Limited",477500000,null,"Medium","Stable"],
+["Thermite Bomb","Limited",470000000,null,"Medium","Stable"],
+["2x Mastery","Gamepass",455000000,null,"Very High","Overpaid"],
+["2x Money","Gamepass",455000000,null,"Very High","Overpaid"],
+["+1 Fruit Storage","Gamepass",420000000,null,"Very High","Overpaid"],
+["Parrot Skin","Limited",415000000,null,"Very High","Stable"],
+["Green Lightning","Limited",350000000,null,"High","Stable"],
+["Fast Boats","Gamepass",305000000,null,"Very High","Overpaid"],
+["2x Boss Drops","Gamepass",285000000,null,"High","Overpaid"],
+["Rose Quartz Diamond","Limited",280000000,null,"High","Stable"],
+["Matrix Eagle","Limited",253330000,null,"High","Stable"],
+["Emerald Diamond","Limited",185000000,null,"Medium","Stable"],
+["Topaz Diamond","Limited",185000000,null,"Medium","Stable"],
+["Control","Mythical",155000000,6450000000,"Very High","Stable"],
+["Requiem Eagle","Limited",146660000,null,"Medium","Stable"],
+["Tiger","Mythical",142500000,5070000000,"High","Stable"],
+["Torment Pain","Limited",137500000,null,"Medium","Stable"],
+["Ruby Diamond","Limited",137500000,null,"Medium","Stable"],
+["Yeti","Mythical",132500000,5070000000,"High","Stable"],
+["Lightning","Legendary",60000000,2970000000,"Medium","Underpaid"],
+["Gas","Mythical",60000000,4070000000,"High","Stable"],
+["Dough","Mythical",30000000,3690000000,"Very High","Overpaid"],
+["Venom","Mythical",21250000,3830000000,"High","Stable"],
+["T-Rex","Mythical",20000000,3570000000,"High","Stable"],
+["Glacier Eagle","Limited",18330000,null,"Low","Stable"],
+["Stat Reset","Gamepass",15000000,null,"Low","Stable"],
+["Buddha","Legendary",10000000,1790000000,"Very High","Overpaid"],
+["Pain","Legendary",10000000,3110000000,"Medium","Stable"],
+["Celebration Bomb","Limited",10000000,null,"Very Low","Stable"],
+["Portal","Legendary",10000000,2460000000,"Very High","Overpaid"],
+["Gravity","Mythical",10000000,3430000000,"Medium","Stable"],
+["Spirit","Mythical",10000000,4150000000,"High","Stable"],
+["Mammoth","Mythical",9750000,3550000000,"Medium","Stable"],
+["Shadow","Mythical",6250000,3740000000,"Medium","Stable"],
+["Blizzard","Legendary",5250000,3170000000,"Medium","Stable"],
+["Phoenix","Legendary",2410000,2330000000,"Low","Stable"],
+["Sound","Legendary",2370000,2110000000,"Low","Stable"],
+["Creation","Legendary",2350000,1910000000,"Very Low","Stable"],
+["Spider","Legendary",1500000,1970000000,"Very Low","Stable"],
+["Love","Legendary",1360000,1840000000,"Low","Stable"],
+["Magma","Rare",1160000,1340000000,"Medium","Overpaid"],
+["Quake","Legendary",1000000,1540000000,"Very Low","Stable"],
+["Diamond","Uncommon",850000,892500000,"Very Low","Stable"],
+["Light","Rare",825000,980000000,"Very Low","Stable"],
+["Ghost","Rare",812500,1090000000,"Very Low","Underpaid"],
+["Eagle","Uncommon",750000,840000000,"Very Low","Stable"],
+["Rubber","Rare",720000,758500000,"Very Low","Stable"],
+["Ice","Uncommon",537500,632500000,"Very Low","Stable"],
+["Sand","Uncommon",440000,705000000,"Very Low","Stable"],
+["Dark","Uncommon",425000,802500000,"Very Low","Stable"],
+["Flame","Uncommon",257500,370000000,"Very Low","Stable"],
+["Spike","Common",180000,136250000,"Very Low","Stable"],
+["Smoke","Common",100000,103250000,"Very Low","Stable"],
+["Bomb","Common",80000,80000000,"Very Low","Stable"],
+["Spring","Common",60000,58330000,"Very Low","Stable"],
+["Blade","Common",45000,25000000,"Very Low","Stable"],
+["Spin","Common",7500,16250000,"Very Low","Stable"],
+["Rocket","Common",5000,10000000,"Very Low","Stable"],
+["Dragon Token","Limited",null,null,"Low","Overpaid"]
+].map((r,i)=>({id:'seed-'+i, name:r[0], category:r[1], normal:r[2], perm:r[3], demand:r[4], trend:r[5], image:null}));
+
+/* =========================================================================
+   CONFIG / STORAGE KEYS
+   ========================================================================= */
+const ITEMS_KEY = 'bfv-items-v2';       // shared — everyone sees the same list
+const USERS_KEY = 'bfv-users-v1';       // shared — the registered account directory
+const SESSION_KEY = 'bfv-session-v1';   // personal — only this visitor's login
+
+// Admin credentials are never stored as plain text, only as a salted SHA-256 hash.
+// This hash is for the password the site owner set up; login re-hashes the typed
+// password with the same salt and compares digests, so the raw password isn't in this file.
+const ADMIN_EMAIL = 'admin';
+const ADMIN_SALT = 'bfv-admin-salt-2026';
+const ADMIN_HASH = '6168ce348f18ef5956eb06ed6fcc0ef6cdcc722c982c80b6a5cfda2bc51ed364';
+
+let items = [];
+let users = [];
+let currentUser = null; // {email, role}
+let editingId = null;
+const youCart = [];
+const themCart = [];
+
+/* =========================================================================
+   CRYPTO HELPERS (Web Crypto SHA-256, no plaintext passwords stored)
+   ========================================================================= */
+async function sha256Hex(str){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+function randomSalt(){
+  const arr = crypto.getRandomValues(new Uint8Array(16));
+  return Array.from(arr).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+/* =========================================================================
+   FORMAT / PARSE HELPERS
+   ========================================================================= */
+function formatValue(n){
+  if(n===null || n===undefined || isNaN(n)) return '—';
+  const sign = n<0?'-':''; n = Math.abs(n);
+  if(n>=1e9) return sign+trimNum(n/1e9)+'B';
+  if(n>=1e6) return sign+trimNum(n/1e6)+'M';
+  if(n>=1e3) return sign+trimNum(n/1e3)+'K';
+  return sign+String(n);
+}
+function trimNum(n){ return (Math.round(n*100)/100).toString(); }
+function parseValue(str){
+  if(str===null || str===undefined) return null;
+  str = String(str).trim();
+  if(str==='' || str==='-' || str.toUpperCase()==='TBD') return null;
+  const m = str.toUpperCase().match(/^(-?[\d.]+)\s*([KMB])?$/);
+  if(!m) return null;
+  let num = parseFloat(m[1]);
+  if(isNaN(num)) return null;
+  if(m[2]==='K') num*=1e3;
+  if(m[2]==='M') num*=1e6;
+  if(m[2]==='B') num*=1e9;
+  return Math.round(num);
+}
+function slug(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
+
+function getItemImage(item){
+  if(item.image && item.image.startsWith('http')) return item.image;
+  return null;
+}
+function isValidEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(()=>t.classList.remove('show'), 2400);
+}
+function isAdmin(){ return currentUser && currentUser.role === 'admin'; }
+
+/* =========================================================================
+   STORAGE (items + users are shared across everyone; session is per-visitor)
+   ========================================================================= */
+async function loadItems(){
+  try{
+    const res = await window.storage.get(ITEMS_KEY, true);
+    if(res && res.value){ items = JSON.parse(res.value); return; }
+  }catch(e){ /* not created yet */ }
+  items = DEFAULT_ITEMS;
+  await saveItems();
+}
+async function saveItems(){
+  try{ await window.storage.set(ITEMS_KEY, JSON.stringify(items), true); }
+  catch(e){ console.error(e); showToast('Could not save — storage error'); }
+}
+async function loadUsers(){
+  try{
+    const res = await window.storage.get(USERS_KEY, true);
+    if(res && res.value){ users = JSON.parse(res.value); return; }
+  }catch(e){ /* not created yet */ }
+  users = [];
+  await saveUsers();
+}
+async function saveUsers(){
+  try{ await window.storage.set(USERS_KEY, JSON.stringify(users), true); }
+  catch(e){ console.error(e); showToast('Could not save account — storage error'); }
+}
+async function loadSession(){
+  try{
+    const res = await window.storage.get(SESSION_KEY, false);
+    if(res && res.value){
+      const s = JSON.parse(res.value);
+      // Re-validate the session still refers to a real account before trusting it
+      if(s.email === ADMIN_EMAIL && s.role === 'admin'){ currentUser = s; return; }
+      const u = users.find(u=>u.email.toLowerCase()===String(s.email).toLowerCase());
+      if(u){ currentUser = {email:u.email, username:u.username||null, role:u.role}; }
+    }
+  }catch(e){ /* no session */ }
+}
+async function saveSession(){
+  try{ await window.storage.set(SESSION_KEY, JSON.stringify(currentUser), false); }
+  catch(e){ console.error(e); }
+}
+async function clearSession(){
+  try{ await window.storage.delete(SESSION_KEY, false); }catch(e){ /* already gone */ }
+}
+
+/* =========================================================================
+   AUTH
+   ========================================================================= */
+async function login(emailRaw, password){
+  const email = emailRaw.trim();
+  if(!email || !password) return 'Enter both email and password.';
+
+  if(email.toLowerCase() === ADMIN_EMAIL){
+    const hash = await sha256Hex(ADMIN_SALT + password);
+    if(hash !== ADMIN_HASH) return 'Incorrect admin password.';
+    currentUser = {email: ADMIN_EMAIL, role:'admin'};
+    await saveSession();
+    return null;
+  }
+
+  const user = users.find(u=>
+    u.email.toLowerCase()===email.toLowerCase() ||
+    (u.username && u.username.toLowerCase()===email.toLowerCase())
+  );
+  if(!user) return 'No account found with that email or username.';
+  const hash = await sha256Hex(user.salt + password);
+  if(hash !== user.hash) return 'Incorrect password.';
+  currentUser = {email:user.email, username:user.username||null, role:user.role};
+  await saveSession();
+  return null;
+}
+
+async function register(emailRaw, password, password2, usernameRaw){
+  const email = emailRaw.trim();
+  const username = (usernameRaw||'').trim();
+  if(!isValidEmail(email)) return 'Enter a valid email address.';
+  if(email.toLowerCase() === ADMIN_EMAIL) return 'That email is reserved.';
+  if(username && username.toLowerCase() === ADMIN_EMAIL) return 'That username is reserved.';
+  if(username && username.length < 3) return 'Username must be at least 3 characters.';
+  if(username && !/^[a-zA-Z0-9_]+$/.test(username)) return 'Username can only contain letters, numbers, and underscores.';
+  if(password.length < 8) return 'Password must be at least 8 characters.';
+  if(password !== password2) return 'Passwords do not match.';
+  if(users.some(u=>u.email.toLowerCase()===email.toLowerCase())) return 'An account with that email already exists.';
+  if(username && users.some(u=>u.username && u.username.toLowerCase()===username.toLowerCase())) return 'That username is already taken.';
+
+  const salt = randomSalt();
+  const hash = await sha256Hex(salt + password);
+  users.push({email, username: username||null, salt, hash, role:'user', createdAt: Date.now()});
+  await saveUsers();
+  currentUser = {email, username: username||null, role:'user'};
+  await saveSession();
+  return null;
+}
+
+async function logout(){
+  currentUser = null;
+  await clearSession();
+  renderAll();
+  showToast('Logged out');
+}
+
+/* =========================================================================
+   RENDER: account widget + admin-gated controls
+   ========================================================================= */
+function renderAccountArea(){
+  const el = document.getElementById('accountArea');
+  if(!currentUser){
+    el.innerHTML = `<button class="btn btn-primary btn-sm" id="loginOpenBtn">Log in / Register</button>`;
+    document.getElementById('loginOpenBtn').addEventListener('click', openAuthModal);
+  } else {
+    const displayName = currentUser.username || currentUser.email;
+    const initial = displayName[0].toUpperCase();
+    const roleClass = currentUser.role;
+    el.innerHTML = `
+      <div class="account-chip">
+        <div class="avatar ${roleClass}">${initial}</div>
+        <span>${displayName}</span>
+        <span class="role-tag ${roleClass}">${currentUser.role}</span>
+      </div>
+      <button class="btn btn-sm" id="logoutBtn">Log out</button>`;
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+  }
+  document.getElementById('openAddBtn').style.display = isAdmin() ? 'inline-flex' : 'none';
+  document.getElementById('resetDataBtn').style.display = isAdmin() ? 'inline-flex' : 'none';
+
+  const note = document.getElementById('adminNote');
+  if(isAdmin()){
+    note.innerHTML = `✎ You're signed in as admin — hover any card to edit or delete it, and use "+ Add Item" to add new entries with a photo.`;
+  } else if(currentUser){
+    const dn = currentUser.username || currentUser.email;
+    note.innerHTML = `👀 You're signed in as <strong>${dn}</strong>. Browsing and the calculator are open to everyone — editing values is admin-only.`;
+  } else {
+    note.innerHTML = `🔒 Values are read-only for guests. <button class="link" id="noteLoginBtn">Log in or register</button> to save your own calculator sessions — editing stays admin-only.`;
+    setTimeout(()=>{
+      const b = document.getElementById('noteLoginBtn');
+      if(b) b.addEventListener('click', openAuthModal);
+    },0);
+  }
+}
+
+/* =========================================================================
+   RENDER: filters, grid, stats, ticker, calculator
+   ========================================================================= */
+function populateFilters(){
+  const cats = [...new Set(items.map(i=>i.category))].sort();
+  const demands = ["Very High","High","Medium","Low","Very Low"];
+  const catSel = document.getElementById('categoryFilter');
+  catSel.innerHTML = '<option value="">All categories</option>' + cats.map(c=>`<option value="${c}">${c}</option>`).join('');
+  const demSel = document.getElementById('demandFilter');
+  demSel.innerHTML = '<option value="">All demand</option>' + demands.map(d=>`<option value="${d}">${d}</option>`).join('');
+}
+
+function currentFilteredSorted(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const cat = document.getElementById('categoryFilter').value;
+  const dem = document.getElementById('demandFilter').value;
+  const sort = document.getElementById('sortSelect').value;
+  let list = items.filter(i=>{
+    if(q && !i.name.toLowerCase().includes(q)) return false;
+    if(cat && i.category!==cat) return false;
+    if(dem && i.demand!==dem) return false;
+    return true;
+  });
+  const valOf = i => (i.normal ?? i.perm ?? -1);
+  if(sort==='value-desc') list.sort((a,b)=>valOf(b)-valOf(a));
+  if(sort==='value-asc') list.sort((a,b)=>valOf(a)-valOf(b));
+  if(sort==='name-asc') list.sort((a,b)=>a.name.localeCompare(b.name));
+  if(sort==='name-desc') list.sort((a,b)=>b.name.localeCompare(a.name));
+  return list;
+}
+
+function renderGrid(){
+  const grid = document.getElementById('itemGrid');
+  const list = currentFilteredSorted();
+  document.getElementById('resultCount').textContent = `${list.length} of ${items.length} items`;
+  if(list.length===0){
+    grid.innerHTML = `<div class="empty-state">No items match your filters.</div>`;
+    return;
+  }
+  const admin = isAdmin();
+  grid.innerHTML = list.map(i=>{
+    const demClass = 'demand-'+i.demand.replace(/\s+/g,'-');
+    const trendClass = 'trend-'+i.trend;
+    const trendArrow = i.trend==='Overpaid' ? '▲' : (i.trend==='Underpaid' ? '▼' : '■');
+    const imgSrc = getItemImage(i);
+    const media = `<img src="${imgSrc}" alt="${i.name}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\\'placeholder\\'>${i.name[0]}</span>'">`;
+    const actions = admin ? `
+        <div class="card-actions">
+          <button class="icon-btn edit" data-id="${i.id}" title="Edit">✎</button>
+          <button class="icon-btn del" data-id="${i.id}" title="Delete">🗑</button>
+        </div>` : `<div class="card-actions"></div>`;
+    return `
+    <div class="card">
+      <div class="card-media">${media}</div>
+      <div class="card-top">
+        <span class="badge badge-${i.category}">${i.category}</span>
+        ${actions}
+      </div>
+      <p class="card-name">${i.name}</p>
+      <div class="val-rows" style="margin-top:10px;">
+        <div class="val-row"><span class="k">Normal</span><span class="v">${formatValue(i.normal)}</span></div>
+        <div class="val-row perm"><span class="k">Permanent</span><span class="v">${formatValue(i.perm)}</span></div>
+      </div>
+      <div class="card-foot">
+        <span class="demand-tag ${demClass}">${i.demand} demand</span>
+        <span class="trend ${trendClass}">${trendArrow} ${i.trend}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  if(admin){
+    grid.querySelectorAll('.icon-btn.edit').forEach(b=>b.addEventListener('click', ()=>openEdit(b.dataset.id)));
+    grid.querySelectorAll('.icon-btn.del').forEach(b=>b.addEventListener('click', ()=>deleteItem(b.dataset.id)));
+  }
+}
+
+function renderStats(){
+  document.getElementById('statCount').textContent = items.length;
+  const valued = items.filter(i=>i.normal!==null);
+  if(valued.length){
+    const top = valued.reduce((a,b)=> (a.normal>b.normal? a:b));
+    document.getElementById('statTop').textContent = formatValue(top.normal);
+    document.getElementById('statTopName').textContent = top.name;
+  }
+}
+
+function renderCalcSelects(){ renderCalcSlots(); }
+
+/* ── Calc state ── */
+const MAX_SLOTS = 4;
+let pickerTarget = null; // 'you' | 'them'
+
+function renderCalcSlots(){
+  renderSideSlots('youSlots', youCart, 'you');
+  renderSideSlots('themSlots', themCart, 'them');
+}
+
+function renderSideSlots(elId, cart, side){
+  const el = document.getElementById(elId);
+  if(!el) return;
+  const slots = [];
+  // filled slots
+  cart.forEach((c, idx) => {
+    const item = items.find(i=>i.id===c.id);
+    if(!item) return;
+    const src = getItemImage(item);
+    slots.push(`
+      <div class="calc-slot filled">
+        <button class="slot-remove" data-side="${side}" data-idx="${idx}">✕</button>
+        <img class="slot-img" src="${src}" alt="${item.name}" onerror="this.style.display='none'">
+        <div class="slot-name">${item.name}</div>
+        <div class="slot-qty-row">
+          <button class="slot-qty-btn" data-side="${side}" data-idx="${idx}" data-action="dec">−</button>
+          <span class="slot-qty">${c.qty}</span>
+          <button class="slot-qty-btn" data-side="${side}" data-idx="${idx}" data-action="inc">+</button>
+        </div>
+        <div class="slot-val">${formatValue((item.normal??0)*c.qty)}</div>
+      </div>`);
+  });
+  // empty slots up to MAX_SLOTS
+  const emptyCount = Math.max(0, MAX_SLOTS - cart.length);
+  for(let i=0; i<emptyCount; i++){
+    slots.push(`
+      <div class="calc-slot empty" data-open-picker="${side}">
+        <div class="slot-plus">+</div>
+        <div class="slot-label">Add Fruit</div>
+      </div>`);
+  }
+  el.innerHTML = slots.join('');
+
+  // bindings
+  el.querySelectorAll('.slot-remove').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+      e.stopPropagation();
+      const arr = btn.dataset.side==='you' ? youCart : themCart;
+      arr.splice(parseInt(btn.dataset.idx),1);
+      renderCalc();
+    });
+  });
+  el.querySelectorAll('.slot-qty-btn').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+      e.stopPropagation();
+      const arr = btn.dataset.side==='you' ? youCart : themCart;
+      const idx = parseInt(btn.dataset.idx);
+      if(btn.dataset.action==='inc'){ arr[idx].qty++; }
+      else { arr[idx].qty--; if(arr[idx].qty<=0) arr.splice(idx,1); }
+      renderCalc();
+    });
+  });
+  el.querySelectorAll('.calc-slot.empty').forEach(slot=>{
+    slot.addEventListener('click', ()=>openPicker(slot.dataset.openPicker));
+  });
+}
+
+function openPicker(side){
+  pickerTarget = side;
+  const overlay = document.getElementById('calcPickerOverlay');
+  overlay.classList.add('open');
+  document.getElementById('calcPickerSearch').value = '';
+  renderPickerGrid('');
+  document.getElementById('calcPickerSearch').focus();
+}
+
+function closePicker(){
+  document.getElementById('calcPickerOverlay').classList.remove('open');
+  pickerTarget = null;
+}
+
+function renderPickerGrid(q){
+  const grid = document.getElementById('calcPickerGrid');
+  if(!grid) return;
+  const list = items
+    .filter(i=> !q || i.name.toLowerCase().includes(q.toLowerCase()))
+    .sort((a,b)=>(b.normal??-1)-(a.normal??-1));
+  if(!list.length){ grid.innerHTML='<div class="calc-empty-msg">No fruits found</div>'; return; }
+  grid.innerHTML = list.map(i=>{
+    const src = getItemImage(i);
+    return `<div class="picker-item" data-id="${i.id}">
+      <img src="${src}" alt="${i.name}" onerror="this.outerHTML='<div class=\\'picker-item-placeholder\\'>${i.name[0]}</div>'">
+      <div class="picker-item-name">${i.name}</div>
+      <div class="picker-item-val">${formatValue(i.normal)}</div>
+      <div class="picker-item-badge">${i.rarity}</div>
+    </div>`;
+  }).join('');
+  grid.querySelectorAll('.picker-item').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      if(!pickerTarget) return;
+      const cart = pickerTarget==='you' ? youCart : themCart;
+      if(cart.length >= MAX_SLOTS){ showToast('Max 4 fruits per side'); return; }
+      const id = el.dataset.id;
+      const existing = cart.find(c=>c.id===id);
+      if(existing) existing.qty++; else cart.push({id, qty:1});
+      renderCalc();
+      closePicker();
+    });
+  });
+}
+
+// picker events
+document.getElementById('calcPickerSearch').addEventListener('input', e=>{
+  renderPickerGrid(e.target.value);
+});
+document.getElementById('calcPickerClose').addEventListener('click', closePicker);
+document.getElementById('calcPickerOverlay').addEventListener('click', e=>{
+  if(e.target===e.currentTarget) closePicker();
+});
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closePicker(); });
+
+function renderTicker(){
+  const sample = items.filter(i=>i.trend!=='Stable' && i.normal!==null).slice(0,10);
+  const pool = sample.length ? sample : items.filter(i=>i.normal!==null).slice(0,10);
+  const el = document.getElementById('tickerEl');
+  el.innerHTML = pool.map(i=>{
+    const cls = i.trend==='Overpaid' ? 'tick-up' : (i.trend==='Underpaid' ? 'tick-down' : '');
+    const arrow = i.trend==='Overpaid' ? '▲' : (i.trend==='Underpaid' ? '▼' : '•');
+    return `<span class="tick-item">${i.name} <span class="${cls}">${arrow} ${formatValue(i.normal)} · ${i.trend}</span></span>`;
+  }).join('');
+}
+
+function renderCartList(cartArr, elId, totalElId){
+  const el = document.getElementById(elId);
+  if(cartArr.length===0){
+    el.innerHTML = `<div class="calc-empty-msg">Add items using search above</div>`;
+  } else {
+    el.innerHTML = cartArr.map((c,idx)=>{
+      const item = items.find(i=>i.id===c.id);
+      if(!item) return '';
+      const val = (item.normal ?? 0) * c.qty;
+      const src = getItemImage(item);
+      return `<div class="calc-line">
+        <img src="${src}" alt="${item.name}" style="width:28px;height:28px;object-fit:contain;border-radius:4px;flex-shrink:0;" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0;"><span class="name">${item.name}</span></div>
+        <div style="display:flex;align-items:center;gap:5px;">
+          <button class="qty-btn" data-action="dec" data-idx="${idx}" data-target="${elId}" style="width:18px;height:18px;border-radius:3px;border:1px solid var(--border);background:var(--bg-alt);color:var(--ink-dim);font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;">−</button>
+          <span class="qty" style="min-width:16px;text-align:center;">${c.qty}</span>
+          <button class="qty-btn" data-action="inc" data-idx="${idx}" data-target="${elId}" style="width:18px;height:18px;border-radius:3px;border:1px solid var(--border);background:var(--bg-alt);color:var(--ink-dim);font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;">+</button>
+          <span class="amt">${formatValue(val)}</span>
+          <button data-idx="${idx}" data-target="${elId}" style="color:var(--pink);background:none;border:none;font-size:14px;line-height:1;padding:0 2px;">✕</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+  const total = cartArr.reduce((sum,c)=>{
+    const item = items.find(i=>i.id===c.id);
+    return sum + (item ? (item.normal ?? 0) * c.qty : 0);
+  },0);
+  document.getElementById(totalElId).textContent = formatValue(total);
+  el.querySelectorAll('button[data-idx]').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const arr = b.dataset.target==='youList' ? youCart : themCart;
+      const idx = parseInt(b.dataset.idx);
+      if(b.dataset.action==='inc'){ arr[idx].qty+=1; renderCalc(); }
+      else if(b.dataset.action==='dec'){
+        arr[idx].qty-=1;
+        if(arr[idx].qty<=0) arr.splice(idx,1);
+        renderCalc();
+      } else { arr.splice(idx,1); renderCalc(); }
+    });
+  });
+  return total;
+}
+
+function renderCalc(){
+  renderCalcSlots();
+  // compute totals
+  const youTotal = youCart.reduce((s,c)=>{ const it=items.find(i=>i.id===c.id); return s+(it?(it.normal??0)*c.qty:0); },0);
+  const themTotal = themCart.reduce((s,c)=>{ const it=items.find(i=>i.id===c.id); return s+(it?(it.normal??0)*c.qty:0); },0);
+  document.getElementById('youTotal').textContent = formatValue(youTotal);
+  document.getElementById('themTotal').textContent = formatValue(themTotal);
+  const verdictEl = document.getElementById('verdict');
+  const fairWrap = document.getElementById('fairWrap');
+  const fairFill = document.getElementById('fairFill');
+  const fairLabel = document.getElementById('fairLabel');
+
+  if(youCart.length===0 && themCart.length===0){
+    verdictEl.textContent = 'Add items to compare';
+    verdictEl.className = 'verdict';
+    if(fairWrap) fairWrap.style.display='none';
+    return;
+  }
+  const diff = youTotal - themTotal;
+  const base = Math.max(youTotal, themTotal, 1);
+  const pct = Math.abs(diff)/base*100;
+
+  // Fair bar: fill = how balanced the trade is (100% = perfect)
+  const fairness = Math.max(0, 100 - pct);
+  if(fairFill){
+    const fillPct = Math.round(fairness);
+    const color = fairness >= 90 ? '#4fae6a' : fairness >= 70 ? '#e0b23b' : '#e0503b';
+    fairFill.style.width = fillPct+'%';
+    fairFill.style.background = color;
+  }
+  if(fairLabel) fairLabel.textContent = `${Math.round(fairness)}% fair`;
+  if(fairWrap) fairWrap.style.display='block';
+
+  if(pct <= 8){
+    verdictEl.textContent = '⚖ Fair trade';
+    verdictEl.className = 'verdict verdict-fair';
+  } else if(diff < 0){
+    verdictEl.textContent = `You lose by ${formatValue(Math.abs(diff))}`;
+    verdictEl.className = 'verdict verdict-you-lose';
+  } else {
+    verdictEl.textContent = `You win by ${formatValue(diff)}`;
+    verdictEl.className = 'verdict verdict-you-win';
+  }
+}
+
+function renderAll(){
+  renderAccountArea();
+  populateFilters();
+  renderGrid();
+  renderStats();
+  renderCalcSelects();
+  renderTicker();
+  renderCalc();
+}
+
+/* =========================================================================
+   CRUD (admin only — also enforced server-side of nothing, so this is a
+   convenience gate; see the closing note about client-only limitations)
+   ========================================================================= */
+function openAdd(){
+  if(!isAdmin()) return;
+  editingId = null;
+  document.getElementById('modalTitle').textContent = 'Add Item';
+  document.getElementById('fName').value = '';
+  document.getElementById('fCategory').value = 'Limited';
+  document.getElementById('fDemand').value = 'Medium';
+  document.getElementById('fNormal').value = '';
+  document.getElementById('fPerm').value = '';
+  document.getElementById('fTrend').value = 'Stable';
+  document.getElementById('fImageUrl').value = '';
+  document.getElementById('fImageFile').value = '';
+  updateImgPreview(null);
+  document.getElementById('overlay').classList.add('open');
+}
+function openEdit(id){
+  if(!isAdmin()) return;
+  const item = items.find(i=>i.id===id);
+  if(!item) return;
+  editingId = id;
+  document.getElementById('modalTitle').textContent = 'Edit Item';
+  document.getElementById('fName').value = item.name;
+  document.getElementById('fCategory').value = item.category;
+  document.getElementById('fDemand').value = item.demand;
+  document.getElementById('fNormal').value = item.normal===null ? '' : item.normal;
+  document.getElementById('fPerm').value = item.perm===null ? '' : item.perm;
+  document.getElementById('fTrend').value = item.trend;
+  document.getElementById('fImageUrl').value = item.image && item.image.startsWith('http') ? item.image : '';
+  document.getElementById('fImageFile').value = '';
+  updateImgPreview(item.image);
+  document.getElementById('overlay').classList.add('open');
+}
+function closeModal(){ document.getElementById('overlay').classList.remove('open'); }
+
+function updateImgPreview(src){
+  const p = document.getElementById('imgPreview');
+  currentImageData = src || null;
+  p.innerHTML = src ? `<img src="${src}">` : 'No image';
+}
+let currentImageData = null;
+
+async function saveModal(){
+  if(!isAdmin()){ showToast('Admin only'); return; }
+  const name = document.getElementById('fName').value.trim();
+  if(!name){ showToast('Give the item a name first'); return; }
+  const data = {
+    name,
+    category: document.getElementById('fCategory').value,
+    demand: document.getElementById('fDemand').value,
+    normal: parseValue(document.getElementById('fNormal').value),
+    perm: parseValue(document.getElementById('fPerm').value),
+    trend: document.getElementById('fTrend').value,
+    image: currentImageData,
+  };
+  if(editingId){
+    const item = items.find(i=>i.id===editingId);
+    Object.assign(item, data);
+    showToast(`Updated "${name}"`);
+  } else {
+    items.push({ id: slug(name)+'-'+Date.now(), ...data });
+    showToast(`Added "${name}"`);
+  }
+  await saveItems();
+  closeModal();
+  renderAll();
+}
+
+async function deleteItem(id){
+  if(!isAdmin()) return;
+  const item = items.find(i=>i.id===id);
+  if(!item) return;
+  if(!confirm(`Delete "${item.name}" from the value list?`)) return;
+  items = items.filter(i=>i.id!==id);
+  for(let i=youCart.length-1;i>=0;i--) if(youCart[i].id===id) youCart.splice(i,1);
+  for(let i=themCart.length-1;i>=0;i--) if(themCart[i].id===id) themCart.splice(i,1);
+  await saveItems();
+  showToast(`Deleted "${item.name}"`);
+  renderAll();
+}
+
+async function resetData(){
+  if(!isAdmin()) return;
+  if(!confirm('Reset the whole list back to the default values? All edits and photos will be lost.')) return;
+  items = DEFAULT_ITEMS.map(i=>({...i}));
+  youCart.length = 0; themCart.length = 0;
+  await saveItems();
+  showToast('Reset to default values');
+  renderAll();
+}
+
+/* Compress an uploaded image client-side so it stores efficiently */
+function fileToCompressedDataUrl(file){
+  return new Promise((resolve, reject)=>{
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error('Could not read file'));
+    reader.onload = () => {
+      const img = new Image();
+      img.onerror = () => reject(new Error('Could not read image'));
+      img.onload = () => {
+        const maxDim = 480;
+        let {width, height} = img;
+        if(width > height && width > maxDim){ height = Math.round(height * maxDim/width); width = maxDim; }
+        else if(height > maxDim){ width = Math.round(width * maxDim/height); height = maxDim; }
+        const canvas = document.createElement('canvas');
+        canvas.width = width; canvas.height = height;
+        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL('image/jpeg', 0.75));
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+/* =========================================================================
+   AUTH MODAL WIRING
+   ========================================================================= */
+function openAuthModal(){
+  document.getElementById('authError').classList.remove('show');
+  document.getElementById('loginEmail').value = '';
+  document.getElementById('loginPassword').value = '';
+  document.getElementById('regUsername').value = '';
+  document.getElementById('regEmail').value = '';
+  document.getElementById('regPassword').value = '';
+  document.getElementById('regPassword2').value = '';
+  switchAuthTab('login');
+  document.getElementById('authOverlay').classList.add('open');
+}
+function closeAuthModal(){ document.getElementById('authOverlay').classList.remove('open'); }
+function switchAuthTab(which){
+  document.getElementById('authError').classList.remove('show');
+  document.getElementById('tabLogin').classList.toggle('active', which==='login');
+  document.getElementById('tabRegister').classList.toggle('active', which==='register');
+  document.getElementById('loginPane').style.display = which==='login' ? 'block' : 'none';
+  document.getElementById('registerPane').style.display = which==='register' ? 'block' : 'none';
+}
+function authFail(msg){
+  const el = document.getElementById('authError');
+  el.textContent = msg;
+  el.classList.add('show');
+}
+
+/* =========================================================================
+   WIRE UP
+   ========================================================================= */
+document.getElementById('openAddBtn').addEventListener('click', openAdd);
+document.getElementById('cancelBtn').addEventListener('click', closeModal);
+document.getElementById('saveBtn').addEventListener('click', saveModal);
+document.getElementById('overlay').addEventListener('click', e=>{ if(e.target.id==='overlay') closeModal(); });
+document.getElementById('resetDataBtn').addEventListener('click', resetData);
+
+document.getElementById('fImageUrl').addEventListener('input', (e)=> updateImgPreview(e.target.value.trim() || null));
+document.getElementById('fImageFile').addEventListener('change', async (e)=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  if(!file.type.startsWith('image/')){ showToast('Please choose an image file'); return; }
+  try{
+    const dataUrl = await fileToCompressedDataUrl(file);
+    document.getElementById('fImageUrl').value = '';
+    updateImgPreview(dataUrl);
+  }catch(err){ showToast('Could not process that image'); }
+});
+
+document.getElementById('searchInput').addEventListener('input', renderGrid);
+document.getElementById('categoryFilter').addEventListener('change', renderGrid);
+document.getElementById('demandFilter').addEventListener('change', renderGrid);
+document.getElementById('sortSelect').addEventListener('change', renderGrid);
+
+document.getElementById('calcClearBtn').addEventListener('click', ()=>{
+  youCart.length = 0; themCart.length = 0; renderCalc();
+});
+
+document.getElementById('tabLogin').addEventListener('click', ()=>switchAuthTab('login'));
+document.getElementById('tabRegister').addEventListener('click', ()=>switchAuthTab('register'));
+document.getElementById('authCancelBtn').addEventListener('click', closeAuthModal);
+document.getElementById('authCancelBtn2').addEventListener('click', closeAuthModal);
+document.getElementById('authOverlay').addEventListener('click', e=>{ if(e.target.id==='authOverlay') closeAuthModal(); });
+
+document.getElementById('loginBtn').addEventListener('click', async ()=>{
+  const btn = document.getElementById('loginBtn');
+  btn.disabled = true; btn.textContent = 'Checking…';
+  const err = await login(document.getElementById('loginEmail').value, document.getElementById('loginPassword').value);
+  btn.disabled = false; btn.textContent = 'Log in';
+  if(err){ authFail(err); return; }
+  closeAuthModal();
+  renderAll();
+  showToast(isAdmin() ? 'Welcome back, admin' : `Welcome, ${currentUser.email}`);
+});
+document.getElementById('registerBtn').addEventListener('click', async ()=>{
+  const btn = document.getElementById('registerBtn');
+  btn.disabled = true; btn.textContent = 'Creating…';
+  const err = await register(
+    document.getElementById('regEmail').value,
+    document.getElementById('regPassword').value,
+    document.getElementById('regPassword2').value,
+    document.getElementById('regUsername').value
+  );
+  btn.disabled = false; btn.textContent = 'Create account';
+  if(err){ authFail(err); return; }
+  closeAuthModal();
+  renderAll();
+  const displayName = currentUser.username || currentUser.email;
+  showToast(`Account created — welcome, ${displayName}`);
+});
+
+/* =========================================================================
+   INIT
+   ========================================================================= */
+(async function init(){
+  await loadItems();
+  await loadUsers();
+  await loadSession();
+  renderAll();
+})();
+</script>
+</body>
+</html>
