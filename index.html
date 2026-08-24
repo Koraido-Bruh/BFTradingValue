@@ -419,15 +419,15 @@
   .calc-fair-label{font-size:9px; color:var(--ink-faint); margin-top:5px; text-align:center; font-family:'Orbitron',sans-serif; letter-spacing:0.1em;}
 
   /* ===== Calc slots ===== */
-  .calc-slots{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px; flex:1;}
+  .calc-slots{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; flex:1;}
   .calc-slot{
-    aspect-ratio:1; border-radius:8px; border:1px solid var(--border);
+    aspect-ratio:1; border-radius:10px; border:1px solid var(--border);
     background:var(--bg-alt); display:flex; flex-direction:column; align-items:center;
     justify-content:center; position:relative; overflow:hidden; cursor:pointer;
     transition:border-color .15s, box-shadow .15s;
   }
   .calc-slot.empty{border-style:dashed;}
-  .calc-slot.empty:hover{border-color:var(--neon); box-shadow:0 0 12px rgba(124,58,255,0.3);}
+  .calc-slot.empty:hover{border-color:var(--neon); box-shadow:0 0 14px rgba(124,58,255,0.35);}
   .calc-slot.empty::before{
     content:''; position:absolute; top:0; left:0; right:0; height:1px;
     background:linear-gradient(90deg, transparent, var(--neon), transparent); opacity:0;
@@ -435,13 +435,13 @@
   }
   .calc-slot.empty:hover::before{opacity:1;}
   .slot-plus{
-    width:32px; height:32px; border-radius:6px; border:1px solid var(--border);
+    width:38px; height:38px; border-radius:8px; border:1px solid var(--border);
     display:flex; align-items:center; justify-content:center;
-    font-size:20px; color:var(--ink-faint); margin-bottom:4px;
+    font-size:24px; color:var(--ink-faint); margin-bottom:6px;
     background:var(--surface); transition:all .15s;
   }
-  .calc-slot.empty:hover .slot-plus{border-color:var(--neon); color:var(--neon-bright); box-shadow:0 0 8px rgba(124,58,255,0.4);}
-  .slot-label{font-size:8.5px; color:var(--ink-faint); font-family:'Orbitron',sans-serif; letter-spacing:0.08em;}
+  .calc-slot.empty:hover .slot-plus{border-color:var(--neon); color:var(--neon-bright); box-shadow:0 0 10px rgba(124,58,255,0.4);}
+  .slot-label{font-size:10px; color:var(--ink-faint); font-family:'Orbitron',sans-serif; letter-spacing:0.08em;}
 
   /* Filled slot */
   .calc-slot.filled{border-color:rgba(124,58,255,0.4); border-style:solid; cursor:default;}
@@ -449,24 +449,24 @@
     content:''; position:absolute; top:0; left:0; right:0; height:2px;
     background:linear-gradient(90deg, var(--neon), var(--cyan)); opacity:0.8;
   }
-  .slot-img{width:58%; height:58%; object-fit:contain; border-radius:6px;}
-  .slot-name{font-size:8px; color:var(--ink-dim); text-align:center; padding:0 4px; line-height:1.3; font-weight:600; margin-top:3px; max-width:90%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-  .slot-val{font-size:8px; color:var(--cyan); font-family:'JetBrains Mono',monospace; font-weight:700;}
+  .slot-img{width:52%; height:52%; object-fit:contain;}
+  .slot-name{font-size:11px; color:var(--ink); text-align:center; padding:0 6px; line-height:1.3; font-weight:700; margin-top:5px; max-width:95%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .slot-val{font-size:11px; color:var(--cyan); font-family:'JetBrains Mono',monospace; font-weight:700; text-shadow:0 0 6px var(--cyan);}
   .slot-remove{
-    position:absolute; top:4px; right:4px; width:16px; height:16px; border-radius:3px;
+    position:absolute; top:5px; right:5px; width:20px; height:20px; border-radius:4px;
     background:rgba(255,45,107,0.2); border:1px solid rgba(255,45,107,0.4); color:var(--pink);
-    font-size:10px; line-height:1; display:flex; align-items:center; justify-content:center;
+    font-size:12px; line-height:1; display:flex; align-items:center; justify-content:center;
     cursor:pointer; transition:all .12s; opacity:0;
   }
   .calc-slot.filled:hover .slot-remove{opacity:1;}
-  .slot-qty-row{display:flex; align-items:center; gap:3px; margin-top:2px;}
+  .slot-qty-row{display:flex; align-items:center; gap:5px; margin-top:4px;}
   .slot-qty-btn{
-    width:14px; height:14px; border-radius:2px; border:1px solid var(--border);
-    background:var(--bg); color:var(--ink-dim); font-size:10px; line-height:1;
+    width:20px; height:20px; border-radius:4px; border:1px solid var(--border);
+    background:var(--bg); color:var(--ink-dim); font-size:13px; line-height:1;
     display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .12s;
   }
   .slot-qty-btn:hover{border-color:var(--neon); color:var(--neon-bright);}
-  .slot-qty{font-size:9px; color:var(--ink); font-family:'JetBrains Mono',monospace; min-width:14px; text-align:center;}
+  .slot-qty{font-size:13px; color:var(--ink); font-family:'JetBrains Mono',monospace; min-width:18px; text-align:center; font-weight:700;}
 
   /* ===== Fruit picker modal ===== */
   .calc-picker-overlay{
@@ -476,28 +476,29 @@
   .calc-picker-overlay.open{display:flex;}
   .calc-picker-modal{
     background:var(--surface); border:1px solid var(--neon); border-radius:10px;
-    width:100%; max-width:560px; max-height:80vh; display:flex; flex-direction:column;
+    width:100%; max-width:760px; max-height:85vh; display:flex; flex-direction:column;
     box-shadow: var(--glow-neon), 0 20px 60px rgba(0,0,0,0.8);
     overflow:hidden;
   }
   .calc-picker-head{
-    display:flex; align-items:center; justify-content:space-between; padding:14px 16px;
+    display:flex; align-items:center; justify-content:space-between; padding:14px 18px;
     border-bottom:1px solid var(--border); flex-shrink:0;
   }
   #calcPickerSearch{
-    width:100%; padding:10px 14px; border:none; border-bottom:1px solid var(--border);
-    background:var(--bg-alt); color:var(--ink); font-size:13px; font-family:inherit;
+    width:100%; padding:12px 18px; border:none; border-bottom:1px solid var(--border);
+    background:var(--bg-alt); color:var(--ink); font-size:14px; font-family:inherit;
     outline:none; flex-shrink:0;
   }
   #calcPickerSearch:focus{border-bottom-color:var(--neon);}
   .calc-picker-grid{
-    display:grid; grid-template-columns:repeat(auto-fill,minmax(90px,1fr));
-    gap:8px; padding:14px; overflow-y:auto; flex:1;
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr));
+    gap:10px; padding:16px; overflow-y:auto; flex:1;
   }
-  .calc-picker-grid::-webkit-scrollbar{width:5px;} .calc-picker-grid::-webkit-scrollbar-thumb{background:var(--neon); border-radius:4px;}
+  .calc-picker-grid::-webkit-scrollbar{width:6px;} .calc-picker-grid::-webkit-scrollbar-thumb{background:var(--neon); border-radius:4px;}
   .picker-item{
-    display:flex; flex-direction:column; align-items:center; gap:5px;
-    background:var(--bg-alt); border:1px solid var(--border); border-radius:8px;
+    aspect-ratio:1;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    background:var(--bg-alt); border:1px solid var(--border); border-radius:10px;
     padding:10px 6px; cursor:pointer; transition:all .15s; text-align:center;
     position:relative; overflow:hidden;
   }
@@ -506,13 +507,13 @@
     background:linear-gradient(90deg, transparent, var(--neon), transparent); opacity:0;
     transition:opacity .15s;
   }
-  .picker-item:hover{border-color:rgba(124,58,255,0.6); background:var(--neon-dim); box-shadow:0 0 12px rgba(124,58,255,0.2);}
+  .picker-item:hover{border-color:rgba(124,58,255,0.7); background:var(--neon-dim); box-shadow:0 0 14px rgba(124,58,255,0.25);}
   .picker-item:hover::before{opacity:1;}
-  .picker-item img{width:52px; height:52px; object-fit:contain; border-radius:6px;}
-  .picker-item-placeholder{width:52px; height:52px; display:flex; align-items:center; justify-content:center; background:var(--surface-2); border-radius:6px; font-family:'Orbitron',sans-serif; font-size:18px; color:var(--border); font-weight:900;}
-  .picker-item-name{font-size:9px; color:var(--ink-dim); font-weight:600; line-height:1.2; max-width:80px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-  .picker-item-val{font-size:8.5px; color:var(--cyan); font-family:'JetBrains Mono',monospace; font-weight:700;}
-  .picker-item-badge{font-size:7.5px; color:var(--ink-faint); font-family:'Orbitron',sans-serif; text-transform:uppercase; letter-spacing:0.06em;}
+  .picker-item img{width:64px; height:64px; object-fit:contain;}
+  .picker-item-placeholder{width:64px; height:64px; display:flex; align-items:center; justify-content:center; background:var(--surface-2); border-radius:8px; font-family:'Orbitron',sans-serif; font-size:22px; color:var(--border); font-weight:900;}
+  .picker-item-name{font-size:11px; color:var(--ink); font-weight:700; line-height:1.2; max-width:100px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .picker-item-val{font-size:10px; color:var(--cyan); font-family:'JetBrains Mono',monospace; font-weight:700;}
+  .picker-item-badge{font-size:8px; color:var(--ink-faint); font-family:'Orbitron',sans-serif; text-transform:uppercase; letter-spacing:0.06em;}
 
   .calc-empty-msg{color:var(--ink-faint); font-size:11px; text-align:center; padding:20px 0; font-family:'Orbitron',sans-serif; letter-spacing:0.06em; opacity:0.6; grid-column:1/-1;}
 
@@ -591,7 +592,37 @@
     .hero{padding:50px 18px 30px;}
     .section{padding:34px 16px;}
     .hero h1{font-size:clamp(22px,7vw,40px);}
+    .calc-picker-modal{max-width:100%; border-radius:14px 14px 0 0; position:fixed; bottom:0; left:0; right:0; max-height:90vh;}
+    .calc-picker-overlay{align-items:flex-end; padding:0;}
+    .calc-picker-grid{grid-template-columns:repeat(auto-fill,minmax(85px,1fr)); gap:8px; padding:12px;}
+    .picker-item img{width:48px; height:48px;}
+    .picker-item-placeholder{width:48px; height:48px;}
+    .calc-cols{gap:12px;}
+    .calc-slot .slot-name{font-size:10px;}
+    .calc-slot .slot-val{font-size:10px;}
   }
+
+  /* ===== Floating mobile nav ===== */
+  .mobile-nav{
+    display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
+    z-index:50; gap:8px; background:var(--surface); border:1px solid var(--border);
+    border-radius:99px; padding:8px 14px;
+    box-shadow: 0 0 20px rgba(124,58,255,0.3), 0 8px 30px rgba(0,0,0,0.6);
+  }
+  .mobile-nav::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:1px; border-radius:99px 99px 0 0;
+    background:linear-gradient(90deg, transparent, var(--neon), var(--cyan), var(--neon), transparent);
+    background-size:200% 100%; animation:borderFlow 4s linear infinite;
+  }
+  .mobile-nav-btn{
+    display:flex; flex-direction:column; align-items:center; gap:2px;
+    background:none; border:none; color:var(--ink-dim); padding:6px 10px; border-radius:8px;
+    font-size:9px; font-family:'Orbitron',sans-serif; letter-spacing:0.06em; text-transform:uppercase;
+    cursor:pointer; transition:all .15s;
+  }
+  .mobile-nav-btn span.icon{font-size:18px; line-height:1;}
+  .mobile-nav-btn:hover, .mobile-nav-btn.active{color:var(--neon-bright);}
+  @media (max-width:640px){ .mobile-nav{display:flex;} }
 </style>
 </head>
 <body>
@@ -1064,7 +1095,8 @@ async function uploadImageToGithub(file){
   const base64 = dataUrl.split(',')[1];
 
   // имя файла — slug из оригинального имени + timestamp
-  const ext = file.name.split('.').pop().toLowerCase().replace('jpg','jpeg') === 'jpeg' ? 'jpg' : (file.name.split('.').pop().toLowerCase() || 'jpg');
+  const isPng = file.type === 'image/png' || file.name.toLowerCase().endsWith('.png');
+  const ext = isPng ? 'png' : 'jpg';
   const safeName = file.name.replace(/\.[^.]+$/, '').replace(/[^a-zA-Z0-9_-]/g,'_').slice(0,40);
   const fileName = `${safeName}_${Date.now()}.${ext}`;
   const path = `img/${fileName}`;
@@ -1175,7 +1207,18 @@ function renderAccountArea(){
   document.getElementById('resetDataBtn').style.display = isAdmin() ? 'inline-flex' : 'none';
   document.getElementById('ghTokenBtn').style.display = isAdmin() ? 'inline-flex' : 'none';
 
-  const note = document.getElementById('adminNote');
+  // mobile nav login button
+  const mobileLoginBtn = document.getElementById('mobileLoginBtn');
+  if(mobileLoginBtn){
+    if(currentUser){
+      const dn = currentUser.username || currentUser.email;
+      mobileLoginBtn.innerHTML = `<span class="icon">👤</span>${dn.slice(0,8)}`;
+      mobileLoginBtn.onclick = logout;
+    } else {
+      mobileLoginBtn.innerHTML = `<span class="icon">👤</span>Login`;
+      mobileLoginBtn.onclick = ()=>document.getElementById('authOverlay').classList.add('open');
+    }
+  }
   if(isAdmin()){
     note.innerHTML = `✎ You're signed in as admin — hover any card to edit or delete it, and use "+ Add Item" to add new entries with a photo.`;
   } else if(currentUser){
@@ -1615,8 +1658,16 @@ function fileToCompressedDataUrl(file, maxDim=480){
         else if(height > maxDim){ width = Math.round(width * maxDim/height); height = maxDim; }
         const canvas = document.createElement('canvas');
         canvas.width = width; canvas.height = height;
-        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-        resolve(canvas.toDataURL('image/jpeg', 0.80));
+        const ctx = canvas.getContext('2d');
+        // Не заливаем фон — оставляем прозрачность для PNG
+        ctx.clearRect(0, 0, width, height);
+        ctx.drawImage(img, 0, 0, width, height);
+        // PNG для прозрачности, JPEG для обычных фото
+        const isPng = file.type === 'image/png' || file.name.toLowerCase().endsWith('.png');
+        resolve(isPng
+          ? canvas.toDataURL('image/png')
+          : canvas.toDataURL('image/jpeg', 0.82)
+        );
       };
       img.src = reader.result;
     };
@@ -1754,5 +1805,18 @@ document.getElementById('registerBtn').addEventListener('click', async ()=>{
   renderAll();
 })();
 </script>
+<!-- Mobile floating nav -->
+<nav class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-btn" onclick="document.getElementById('values').scrollIntoView({behavior:'smooth'})">
+    <span class="icon">📋</span>Values
+  </button>
+  <button class="mobile-nav-btn" onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth'})">
+    <span class="icon">⚖️</span>Calc
+  </button>
+  <button class="mobile-nav-btn" id="mobileLoginBtn" onclick="document.getElementById('authOverlay').classList.add('open')">
+    <span class="icon">👤</span>Login
+  </button>
+</nav>
+
 </body>
 </html>
