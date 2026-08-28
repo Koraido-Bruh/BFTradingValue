@@ -1060,17 +1060,92 @@ function isAdmin(){ return currentUser && currentUser.role === 'admin'; }
    items и users — shared через localStorage (один браузер = один набор данных)
    session — тоже localStorage, но отдельный ключ
    ========================================================================= */
+/* =========================================================================
+   STORAGE — гибридная система:
+   - items хранятся в GitHub (items.json) — видны всем устройствам
+   - users хранятся в localStorage (приватно, только на этом устройстве)
+   - session хранится в localStorage (приватно)
+   - priceLog хранится в localStorage
+   ========================================================================= */
+
+const GH_REPO    = 'Koraido-Bruh/BFTradingValue';
+const GH_BRANCH  = 'main';
+const GH_ITEMS_PATH = 'items.json';
+
+async function ghFetch(path, method='GET', body=null){
+  const token = getGhToken();
+  const url = `https://api.github.com/repos/${GH_REPO}/contents/${path}`;
+  const opts = {
+    method,
+    headers:{
+      Accept:'application/vnd.github.v3+json',
+      'Content-Type':'application/json',
+      ...(token ? {Authorization:`token ${token}`} : {})
+    }
+  };
+  if(body) opts.body = JSON.stringify(body);
+  return fetch(url, opts);
+}
+
 async function loadItems(){
+  try{
+    // Сначала пробуем загрузить с GitHub (публично, без токена)
+    const res = await ghFetch(GH_ITEMS_PATH);
+    if(res.ok){
+      const data = await res.json();
+      const content = atob(data.content.replace(/\n/g,''));
+      items = JSON.parse(content);
+      // кешируем sha для последующего сохранения
+      window._itemsSha = data.sha;
+      // также кешируем в localStorage как запасной вариант
+      try{ localStorage.setItem(ITEMS_KEY, JSON.stringify(items)); }catch(e){}
+      return;
+    }
+  }catch(e){ console.warn('GitHub load failed, using localStorage:', e); }
+
+  // Запасной вариант — localStorage
   try{
     const raw = localStorage.getItem(ITEMS_KEY);
     if(raw){ items = JSON.parse(raw); return; }
   }catch(e){}
+
+  // Дефолт
   items = DEFAULT_ITEMS;
   await saveItems();
 }
+
 async function saveItems(){
-  try{ localStorage.setItem(ITEMS_KEY, JSON.stringify(items)); }
-  catch(e){ console.error(e); showToast('Could not save — storage error'); }
+  // Всегда обновляем localStorage (быстрый кеш)
+  try{ localStorage.setItem(ITEMS_KEY, JSON.stringify(items)); }catch(e){}
+
+  // Сохраняем на GitHub если есть токен
+  const token = getGhToken();
+  if(!token) return;
+
+  try{
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(items, null, 2))));
+    const body = {
+      message: 'Update items.json',
+      content,
+      branch: GH_BRANCH,
+      ...(window._itemsSha ? {sha: window._itemsSha} : {})
+    };
+    const res = await ghFetch(GH_ITEMS_PATH, 'PUT', body);
+    if(res.ok){
+      const data = await res.json();
+      window._itemsSha = data.content.sha;
+    } else if(res.status === 409){
+      // Конфликт — получаем актуальный sha и повторяем
+      const check = await ghFetch(GH_ITEMS_PATH);
+      if(check.ok){
+        const d = await check.json();
+        window._itemsSha = d.sha;
+        body.sha = d.sha;
+        const retry = await ghFetch(GH_ITEMS_PATH, 'PUT', body);
+        if(retry.ok){ const rd = await retry.json(); window._itemsSha = rd.content.sha; }
+      }
+    }
+  }catch(e){ console.warn('GitHub save failed:', e); }
 }
 async function loadUsers(){
   try{
@@ -1108,9 +1183,6 @@ async function clearSession(){
    Загружает картинку напрямую в папку img/ репозитория через GitHub API.
    Токен хранится в localStorage только на твоём устройстве.
    ========================================================================= */
-const GH_REPO  = 'Koraido-Bruh/BFTradingValue';
-const GH_BRANCH = 'main';
-
 function getGhToken(){ return localStorage.getItem('gh_token') || ''; }
 function setGhToken(t){ if(t) localStorage.setItem('gh_token',t); else localStorage.removeItem('gh_token'); }
 
