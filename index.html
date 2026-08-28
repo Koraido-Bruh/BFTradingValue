@@ -429,6 +429,14 @@
     font-family:'Orbitron',sans-serif; font-size:14px; color:var(--border); background:var(--surface-2); border-radius:4px; font-weight:900;}
   .calc-fruit-name{font-size:8.5px; color:var(--ink-dim); line-height:1.2; max-width:72px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
   .calc-fruit-val{color:var(--cyan); font-size:9px; font-weight:700; text-shadow: 0 0 6px var(--cyan);}
+  .calc-diff{
+    margin-top:8px; text-align:center;
+    font-family:'Orbitron',sans-serif; font-size:15px; font-weight:800;
+    letter-spacing:0.06em; padding:8px 14px; border-radius:6px;
+  }
+  .calc-diff.plus{color:var(--good); text-shadow:0 0 12px var(--good);}
+  .calc-diff.minus{color:var(--pink); text-shadow:0 0 12px var(--pink);}
+  .calc-diff.even{color:var(--ink-dim);}
   .calc-fair-wrap{margin-top:14px;}
   .calc-fair-bar{height:6px; border-radius:0; background:var(--bg-alt); border:1px solid var(--border); overflow:hidden;}
   .calc-fair-fill{height:100%; transition:width .4s ease, background .4s ease;}
@@ -728,6 +736,7 @@
       <div class="calc-vs">
         <div class="vs-badge">VS</div>
         <div class="verdict" id="verdict">Add items to compare</div>
+        <div class="calc-diff" id="calcDiff" style="display:none;"></div>
         <div class="calc-fair-wrap" id="fairWrap" style="display:none;">
           <div class="calc-fair-bar"><div class="calc-fair-fill" id="fairFill"></div></div>
           <div class="calc-fair-label" id="fairLabel"></div>
@@ -1647,36 +1656,54 @@ function renderCalc(){
   const fairWrap = document.getElementById('fairWrap');
   const fairFill = document.getElementById('fairFill');
   const fairLabel = document.getElementById('fairLabel');
+  const diffEl = document.getElementById('calcDiff');
 
   if(youCart.length===0 && themCart.length===0){
     verdictEl.textContent = 'Add items to compare';
     verdictEl.className = 'verdict';
     if(fairWrap) fairWrap.style.display='none';
+    if(diffEl) diffEl.style.display='none';
     return;
   }
   const diff = youTotal - themTotal;
   const base = Math.max(youTotal, themTotal, 1);
   const pct = Math.abs(diff)/base*100;
 
-  // Fair bar: fill = how balanced the trade is (100% = perfect)
+  // Diff блок с суммой — показываем всегда если есть разница
+  if(diffEl){
+    if(diff === 0){
+      diffEl.style.display='none';
+    } else {
+      diffEl.style.display='block';
+      if(diff > 0){
+        diffEl.textContent = `+${formatValue(diff)}`;
+        diffEl.className = 'calc-diff plus';
+      } else {
+        diffEl.textContent = `-${formatValue(Math.abs(diff))}`;
+        diffEl.className = 'calc-diff minus';
+      }
+    }
+  }
+
+  // Fair bar
   const fairness = Math.max(0, 100 - pct);
   if(fairFill){
     const fillPct = Math.round(fairness);
-    const color = fairness >= 90 ? '#4fae6a' : fairness >= 70 ? '#e0b23b' : '#e0503b';
+    const color = fairness >= 97 ? '#00ffaa' : fairness >= 80 ? '#e0b23b' : '#ff2d6b';
     fairFill.style.width = fillPct+'%';
     fairFill.style.background = color;
   }
   if(fairLabel) fairLabel.textContent = `${Math.round(fairness)}% fair`;
   if(fairWrap) fairWrap.style.display='block';
 
-  if(pct <= 8){
+  if(pct <= 3){
     verdictEl.textContent = '⚖ Fair trade';
     verdictEl.className = 'verdict verdict-fair';
   } else if(diff < 0){
-    verdictEl.textContent = `You lose by ${formatValue(Math.abs(diff))}`;
+    verdictEl.textContent = `You lose`;
     verdictEl.className = 'verdict verdict-you-lose';
   } else {
-    verdictEl.textContent = `You win by ${formatValue(diff)}`;
+    verdictEl.textContent = `You win`;
     verdictEl.className = 'verdict verdict-you-win';
   }
 }
