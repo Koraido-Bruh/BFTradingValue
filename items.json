@@ -1,1 +1,842 @@
-
+[
+  {
+    "id": "seed-0",
+    "name": "3x Mythical Scroll",
+    "category": "Limited",
+    "normal": 1070000000,
+    "perm": null,
+    "demand": "Medium",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/BadgeMythicalScrollx3_1787814661669.png"
+  },
+  {
+    "id": "seed-1",
+    "name": "5x Legendary Scroll",
+    "category": "Limited",
+    "normal": 620000000,
+    "perm": null,
+    "demand": "Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/BadgeLegendaryScrollx5_1787814182022.png"
+  },
+  {
+    "id": "seed-2",
+    "name": "Dog Blade",
+    "category": "Limited",
+    "normal": 400000000,
+    "perm": null,
+    "demand": "Very High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Dog_Blade_1787813763252.png"
+  },
+  {
+    "id": "seed-3",
+    "name": "DogHouse Frame Break",
+    "category": "Limited",
+    "normal": 7000000000,
+    "perm": null,
+    "demand": "Very High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Doghouse__28Frame_Break_29_Profile_Backg_1787815667251.png"
+  },
+  {
+    "id": "seed-4",
+    "name": "Rabid Skin",
+    "category": "Limited",
+    "normal": 7800000000,
+    "perm": null,
+    "demand": "Very High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Rabid_Skin_1787815735345.png"
+  },
+  {
+    "id": "seed-5",
+    "name": "Eclipse Chromatic",
+    "category": "Limited",
+    "normal": 40000000000,
+    "perm": null,
+    "demand": "Very High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Dragon__28West_29_Eclipse_1787815536620.png"
+  },
+  {
+    "id": "seed-6",
+    "name": "Galaxy Kitsune",
+    "category": "Limited",
+    "normal": 10000000000,
+    "perm": null,
+    "demand": "Very High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Empyrean_Fruit__28Galaxy_29_1787815495324.png"
+  },
+  {
+    "id": "seed-7",
+    "name": "Crimson Kitsune",
+    "category": "Limited",
+    "normal": 7300000000,
+    "perm": null,
+    "demand": "Very High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Empyrean_Fruit_1787815446926.png"
+  },
+  {
+    "id": "seed-8",
+    "name": "Ember Dragon",
+    "category": "Limited",
+    "normal": 6820000000,
+    "perm": null,
+    "demand": "Very High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Ember_Dragon_Fruit__28West_29_1787815370499.png"
+  },
+  {
+    "id": "seed-9",
+    "name": "Meme Fruit",
+    "category": "Limited",
+    "normal": 5660000000,
+    "perm": null,
+    "demand": "High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Meme_Fruit_1787815292551.png"
+  },
+  {
+    "id": "seed-10",
+    "name": "Purple Lightning",
+    "category": "Limited",
+    "normal": 5130000000,
+    "perm": null,
+    "demand": "Very High",
+    "trend": "Overpaid",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Purple_Lightning_Fruit_1787815201253.png"
+  },
+  {
+    "id": "seed-11",
+    "name": "West Dragon",
+    "category": "Mythical",
+    "normal": 4800000000,
+    "perm": 7630000000,
+    "demand": "Very High",
+    "trend": "Overpaid",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Dragon__28West_29_Fruit_1787815111378.png"
+  },
+  {
+    "id": "seed-12",
+    "name": "Fruit Notifier",
+    "category": "Gamepass",
+    "normal": 4550000000,
+    "perm": null,
+    "demand": "Very High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/BadgeFruitNotifier_1787815154882.png"
+  },
+  {
+    "id": "seed-13",
+    "name": "East Dragon",
+    "category": "Mythical",
+    "normal": 4250000000,
+    "perm": 7630000000,
+    "demand": "Very High",
+    "trend": "Overpaid",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Dragon__28East_29_Fruit_1787815004884.png"
+  },
+  {
+    "id": "seed-14",
+    "name": "Super Spirit Pain",
+    "category": "Limited",
+    "normal": 3020000000,
+    "perm": null,
+    "demand": "Very High",
+    "trend": "Overpaid",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Super_Spirit_Pain_Fruit_1787814972313.png"
+  },
+  {
+    "id": "seed-15",
+    "name": "Red Lightning",
+    "category": "Limited",
+    "normal": 2570000000,
+    "perm": null,
+    "demand": "Very High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Red_Lightning_Fruit_1787814934230.png"
+  },
+  {
+    "id": "seed-16",
+    "name": "Yellow Lightning",
+    "category": "Limited",
+    "normal": 1690000000,
+    "perm": null,
+    "demand": "Very High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Yellow_Lightning_Fruit_1787814876665.png"
+  },
+  {
+    "id": "seed-17",
+    "name": "Divine Portal",
+    "category": "Limited",
+    "normal": 1400000000,
+    "perm": null,
+    "demand": "Very High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Divine_Portal_Fruit_1787814807215.png"
+  },
+  {
+    "id": "seed-18",
+    "name": "Dark Blade",
+    "category": "Gamepass",
+    "normal": 1130000000,
+    "perm": null,
+    "demand": "Very High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/BadgeDarkBlade_1787814701146.png"
+  },
+  {
+    "id": "seed-19",
+    "name": "Werewolf",
+    "category": "Limited",
+    "normal": 925000000,
+    "perm": null,
+    "demand": "High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Werewolf_Fruit_1787814628534.png"
+  },
+  {
+    "id": "seed-20",
+    "name": "Celestial Pain",
+    "category": "Limited",
+    "normal": 917500000,
+    "perm": null,
+    "demand": "High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Celestial_Fruit_1787814566631.png"
+  },
+  {
+    "id": "seed-21",
+    "name": "Fiend Yeti",
+    "category": "Legendary",
+    "normal": 830000000,
+    "perm": null,
+    "demand": "High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Fiend_Fruit_1787814492830.png"
+  },
+  {
+    "id": "seed-22",
+    "name": "Frustration Pain",
+    "category": "Limited",
+    "normal": 817500000,
+    "perm": null,
+    "demand": "High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Frustration_Fruit_1787814351123.png"
+  },
+  {
+    "id": "seed-23",
+    "name": "Sadness Pain",
+    "category": "Limited",
+    "normal": 732500000,
+    "perm": null,
+    "demand": "High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Sadness_Fruit_1787814334581.png"
+  },
+  {
+    "id": "seed-24",
+    "name": "Kitsune",
+    "category": "Mythical",
+    "normal": 622500000,
+    "perm": 6450000000,
+    "demand": "Very High",
+    "trend": "Overpaid",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Kitsune_Fruit_1787814266944.png"
+  },
+  {
+    "id": "seed-25",
+    "name": "Azura Bomb",
+    "category": "Limited",
+    "normal": 477500000,
+    "perm": null,
+    "demand": "Medium",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Azura_Bomb_Fruit_1787814136503.png"
+  },
+  {
+    "id": "seed-26",
+    "name": "Nuclear Bomb",
+    "category": "Limited",
+    "normal": 477500000,
+    "perm": null,
+    "demand": "Medium",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Nuclear_Bomb_Fruit_1787814072664.png"
+  },
+  {
+    "id": "seed-27",
+    "name": "Thermite Bomb",
+    "category": "Limited",
+    "normal": 470000000,
+    "perm": null,
+    "demand": "Medium",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Thermite_Bomb_Fruit_1787814012027.png"
+  },
+  {
+    "id": "seed-28",
+    "name": "2x Mastery",
+    "category": "Gamepass",
+    "normal": 455000000,
+    "perm": null,
+    "demand": "Very High",
+    "trend": "Overpaid",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/BadgeMasteryx2_1787813962191.png"
+  },
+  {
+    "id": "seed-29",
+    "name": "2x Money",
+    "category": "Gamepass",
+    "normal": 455000000,
+    "perm": null,
+    "demand": "Very High",
+    "trend": "Overpaid",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/BadgeMoneyx2_1787813914857.png"
+  },
+  {
+    "id": "seed-30",
+    "name": "+1 Fruit Storage",
+    "category": "Gamepass",
+    "normal": 420000000,
+    "perm": null,
+    "demand": "Very High",
+    "trend": "Overpaid",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/BadgeFruitStorage_1787813892329.png"
+  },
+  {
+    "id": "seed-31",
+    "name": "Parrot Skin",
+    "category": "Limited",
+    "normal": 415000000,
+    "perm": null,
+    "demand": "Medium",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/ParrotMug_1787813813764.png"
+  },
+  {
+    "id": "seed-32",
+    "name": "Green Lightning",
+    "category": "Limited",
+    "normal": 350000000,
+    "perm": null,
+    "demand": "High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Green_Lightning_Fruit_1787813622929.png"
+  },
+  {
+    "id": "seed-33",
+    "name": "Fast Boats",
+    "category": "Gamepass",
+    "normal": 305000000,
+    "perm": null,
+    "demand": "Very High",
+    "trend": "Overpaid",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/BadgeBoats_1787813534376.png"
+  },
+  {
+    "id": "seed-34",
+    "name": "2x Boss Drops",
+    "category": "Gamepass",
+    "normal": 285000000,
+    "perm": null,
+    "demand": "High",
+    "trend": "Overpaid",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/BadgeBossDrops_1787813428718.png"
+  },
+  {
+    "id": "seed-35",
+    "name": "Rose Quartz Diamond",
+    "category": "Limited",
+    "normal": 280000000,
+    "perm": null,
+    "demand": "High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Rose_Quartz_Diamond_Fruit_1787813338933.png"
+  },
+  {
+    "id": "seed-36",
+    "name": "Matrix Eagle",
+    "category": "Limited",
+    "normal": 253330000,
+    "perm": null,
+    "demand": "High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Matrix_Eagle_Fruit_1787813307446.png"
+  },
+  {
+    "id": "seed-37",
+    "name": "Emerald Diamond",
+    "category": "Limited",
+    "normal": 185000000,
+    "perm": null,
+    "demand": "Medium",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Emerald_Diamond_Fruit_1787813240257.png"
+  },
+  {
+    "id": "seed-38",
+    "name": "Topaz Diamond",
+    "category": "Limited",
+    "normal": 185000000,
+    "perm": null,
+    "demand": "Medium",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Topaz_Diamond_Fruit_1787813214334.png"
+  },
+  {
+    "id": "seed-39",
+    "name": "Control",
+    "category": "Mythical",
+    "normal": 155000000,
+    "perm": 6450000000,
+    "demand": "Very High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Control_Fruit_1787813101130.png"
+  },
+  {
+    "id": "seed-40",
+    "name": "Requiem Eagle",
+    "category": "Limited",
+    "normal": 146660000,
+    "perm": null,
+    "demand": "Medium",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Requiem_Eagle_Fruit_1787813039701.png"
+  },
+  {
+    "id": "seed-41",
+    "name": "Tiger",
+    "category": "Mythical",
+    "normal": 142500000,
+    "perm": 5070000000,
+    "demand": "High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Tiger_Fruit_1787812914754.png"
+  },
+  {
+    "id": "seed-42",
+    "name": "Torment Pain",
+    "category": "Limited",
+    "normal": 137500000,
+    "perm": null,
+    "demand": "Medium",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Torment_Fruit_1787812858142.png"
+  },
+  {
+    "id": "seed-43",
+    "name": "Ruby Diamond",
+    "category": "Limited",
+    "normal": 137500000,
+    "perm": null,
+    "demand": "Medium",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Ruby_Diamond_Fruit_1787812792733.png"
+  },
+  {
+    "id": "seed-44",
+    "name": "Yeti",
+    "category": "Mythical",
+    "normal": 132500000,
+    "perm": 5070000000,
+    "demand": "High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Yeti_Fruit_1787812663293.png"
+  },
+  {
+    "id": "seed-45",
+    "name": "Lightning",
+    "category": "Legendary",
+    "normal": 60000000,
+    "perm": 2970000000,
+    "demand": "Medium",
+    "trend": "Underpaid",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/image_1787812570058_1787812581392.png"
+  },
+  {
+    "id": "seed-46",
+    "name": "Gas",
+    "category": "Mythical",
+    "normal": 60000000,
+    "perm": 4070000000,
+    "demand": "High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Gas_Fruit_1787812498852.png"
+  },
+  {
+    "id": "seed-47",
+    "name": "Dough",
+    "category": "Mythical",
+    "normal": 30000000,
+    "perm": 3690000000,
+    "demand": "Very High",
+    "trend": "Overpaid",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Dough_Fruit_1787812441541.png"
+  },
+  {
+    "id": "seed-48",
+    "name": "Venom",
+    "category": "Mythical",
+    "normal": 21250000,
+    "perm": 3830000000,
+    "demand": "High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Venom_Fruit_1787812411737.png"
+  },
+  {
+    "id": "seed-49",
+    "name": "T-Rex",
+    "category": "Mythical",
+    "normal": 20000000,
+    "perm": 3570000000,
+    "demand": "High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/T-Rex_Fruit_1787807809720.png"
+  },
+  {
+    "id": "seed-50",
+    "name": "Glacier Eagle",
+    "category": "Limited",
+    "normal": 18330000,
+    "perm": null,
+    "demand": "Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Glacier_Eagle_Fruit_1787807644844.png"
+  },
+  {
+    "id": "seed-51",
+    "name": "Stat Reset",
+    "category": "Gamepass",
+    "normal": 15000000,
+    "perm": null,
+    "demand": "Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/StatReset_1787807497367.png"
+  },
+  {
+    "id": "seed-52",
+    "name": "Buddha",
+    "category": "Legendary",
+    "normal": 10000000,
+    "perm": 1790000000,
+    "demand": "Very High",
+    "trend": "Overpaid",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Buddha_Fruit_1787807355403.png"
+  },
+  {
+    "id": "seed-53",
+    "name": "Pain",
+    "category": "Legendary",
+    "normal": 10000000,
+    "perm": 3110000000,
+    "demand": "Medium",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Pain_Fruit_1787807237446.png"
+  },
+  {
+    "id": "seed-54",
+    "name": "Celebration Bomb",
+    "category": "Limited",
+    "normal": 10000000,
+    "perm": null,
+    "demand": "Very Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Celebration_Bomb_Fruit_1787807204576.png"
+  },
+  {
+    "id": "seed-55",
+    "name": "Portal",
+    "category": "Legendary",
+    "normal": 10000000,
+    "perm": 2460000000,
+    "demand": "Very High",
+    "trend": "Overpaid",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Portal_Fruit_1787807102471.png"
+  },
+  {
+    "id": "seed-56",
+    "name": "Gravity",
+    "category": "Mythical",
+    "normal": 10000000,
+    "perm": 3430000000,
+    "demand": "Medium",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Gravity_Fruit_1787807073426.png"
+  },
+  {
+    "id": "seed-57",
+    "name": "Spirit",
+    "category": "Mythical",
+    "normal": 10000000,
+    "perm": 4150000000,
+    "demand": "High",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Spirit_Fruit_1787807028502.png"
+  },
+  {
+    "id": "seed-58",
+    "name": "Mammoth",
+    "category": "Mythical",
+    "normal": 9750000,
+    "perm": 3550000000,
+    "demand": "Medium",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Mammoth_Fruit_1787806981802.png"
+  },
+  {
+    "id": "seed-59",
+    "name": "Shadow",
+    "category": "Mythical",
+    "normal": 6250000,
+    "perm": 3740000000,
+    "demand": "Medium",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Shadow_Fruit_1787806878665.png"
+  },
+  {
+    "id": "seed-60",
+    "name": "Blizzard",
+    "category": "Legendary",
+    "normal": 5250000,
+    "perm": 3170000000,
+    "demand": "Medium",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Blizzard_Fruit_1787806833867.png"
+  },
+  {
+    "id": "seed-61",
+    "name": "Phoenix",
+    "category": "Legendary",
+    "normal": 2410000,
+    "perm": 2330000000,
+    "demand": "Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Phoenix_Fruit_1787806799850.png"
+  },
+  {
+    "id": "seed-62",
+    "name": "Sound",
+    "category": "Legendary",
+    "normal": 2370000,
+    "perm": 2110000000,
+    "demand": "Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Sound_Fruit_1787806767186.png"
+  },
+  {
+    "id": "seed-63",
+    "name": "Creation",
+    "category": "Legendary",
+    "normal": 2350000,
+    "perm": 1910000000,
+    "demand": "Very Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Creation_Fruit_1787806721232.png"
+  },
+  {
+    "id": "seed-64",
+    "name": "Spider",
+    "category": "Legendary",
+    "normal": 1500000,
+    "perm": 1970000000,
+    "demand": "Very Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Spider_Fruit_1787806660309.png"
+  },
+  {
+    "id": "seed-65",
+    "name": "Love",
+    "category": "Legendary",
+    "normal": 1360000,
+    "perm": 1840000000,
+    "demand": "Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Love_Fruit_1787806628427.png"
+  },
+  {
+    "id": "seed-66",
+    "name": "Magma",
+    "category": "Rare",
+    "normal": 1160000,
+    "perm": 1340000000,
+    "demand": "Medium",
+    "trend": "Overpaid",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Magma_Fruit_1787806570180.png"
+  },
+  {
+    "id": "seed-67",
+    "name": "Quake",
+    "category": "Legendary",
+    "normal": 1000000,
+    "perm": 1540000000,
+    "demand": "Very Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Quake_Fruit_1787806541070.png"
+  },
+  {
+    "id": "seed-68",
+    "name": "Diamond",
+    "category": "Uncommon",
+    "normal": 850000,
+    "perm": 892500000,
+    "demand": "Very Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Diamond_Fruit_1787806441966.png"
+  },
+  {
+    "id": "seed-69",
+    "name": "Light",
+    "category": "Rare",
+    "normal": 825000,
+    "perm": 980000000,
+    "demand": "Very Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Light_Fruit_1787806400357.png"
+  },
+  {
+    "id": "seed-70",
+    "name": "Ghost",
+    "category": "Rare",
+    "normal": 812500,
+    "perm": 1090000000,
+    "demand": "Very Low",
+    "trend": "Underpaid",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Ghost_Fruit_1787806368285.png"
+  },
+  {
+    "id": "seed-71",
+    "name": "Eagle",
+    "category": "Uncommon",
+    "normal": 750000,
+    "perm": 840000000,
+    "demand": "Very Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Eagle_Fruit_1787806260433.png"
+  },
+  {
+    "id": "seed-72",
+    "name": "Rubber",
+    "category": "Rare",
+    "normal": 720000,
+    "perm": 758500000,
+    "demand": "Very Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Rubber_Fruit_1787806184855.png"
+  },
+  {
+    "id": "seed-73",
+    "name": "Ice",
+    "category": "Uncommon",
+    "normal": 537500,
+    "perm": 632500000,
+    "demand": "Very Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/ice_1787806153212.png"
+  },
+  {
+    "id": "seed-74",
+    "name": "Sand",
+    "category": "Uncommon",
+    "normal": 440000,
+    "perm": 705000000,
+    "demand": "Very Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Sand_Fruit_1787806075370.png"
+  },
+  {
+    "id": "seed-75",
+    "name": "Dark",
+    "category": "Uncommon",
+    "normal": 425000,
+    "perm": 802500000,
+    "demand": "Very Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Dark_Fruit_1787806138798.png"
+  },
+  {
+    "id": "seed-76",
+    "name": "Flame",
+    "category": "Uncommon",
+    "normal": 257500,
+    "perm": 370000000,
+    "demand": "Very Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Flame_Fruit_1787805996132.png"
+  },
+  {
+    "id": "seed-77",
+    "name": "Spike",
+    "category": "Common",
+    "normal": 180000,
+    "perm": 136250000,
+    "demand": "Very Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Spike_Fruit_1787805960839.png"
+  },
+  {
+    "id": "seed-78",
+    "name": "Smoke",
+    "category": "Common",
+    "normal": 100000,
+    "perm": 103250000,
+    "demand": "Very Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Smoke_Fruit_1787805902063.png"
+  },
+  {
+    "id": "seed-79",
+    "name": "Bomb",
+    "category": "Common",
+    "normal": 80000,
+    "perm": 80000000,
+    "demand": "Very Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Bomb_Fruit_1787805814232.png"
+  },
+  {
+    "id": "seed-80",
+    "name": "Spring",
+    "category": "Common",
+    "normal": 60000,
+    "perm": 58330000,
+    "demand": "Very Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Spring_Fruit_1787805875912.png"
+  },
+  {
+    "id": "seed-81",
+    "name": "Blade",
+    "category": "Common",
+    "normal": 45000,
+    "perm": 25000000,
+    "demand": "Very Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Chop_Fruit_1787805615853.png"
+  },
+  {
+    "id": "seed-82",
+    "name": "Spin",
+    "category": "Common",
+    "normal": 7500,
+    "perm": 16250000,
+    "demand": "Very Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Spin_Fruit_1787805719080.png"
+  },
+  {
+    "id": "seed-83",
+    "name": "Rocket",
+    "category": "Common",
+    "normal": 5000,
+    "perm": 10000000,
+    "demand": "Very Low",
+    "trend": "Stable",
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Rocket_Fruit_1787888352951.png"
+  }
+]
