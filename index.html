@@ -809,6 +809,9 @@
 
 <footer>
   Fan-made value tracker inspired by community trading boards. Not affiliated with Roblox Corporation or the Blox Fruits developers.
+  <div style="margin-top:8px; font-size:11px; color:var(--neon-bright); font-family:'Orbitron',sans-serif; letter-spacing:0.1em;">
+    Discord: <span style="color:var(--cyan);">omgpraded</span>
+  </div>
   <div class="foot-actions">
     <button class="btn btn-sm" id="resetDataBtn" style="display:none;">Reset to default values</button>
     <button class="btn btn-sm" id="ghTokenBtn" style="display:none;">🔑 GitHub Token</button>
@@ -1169,9 +1172,21 @@ async function saveItems(){
 
   // Сохраняем на GitHub если есть токен
   const token = getGhToken();
-  if(!token) return;
+  if(!token){
+    showToast('⚠ No GitHub token — changes saved locally only');
+    return;
+  }
 
   try{
+    // Если нет sha — получаем его сначала
+    if(!window._itemsSha){
+      const check = await ghFetch(GH_ITEMS_PATH);
+      if(check.ok){
+        const d = await check.json();
+        window._itemsSha = d.sha;
+      }
+    }
+
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(items, null, 2))));
     const body = {
       message: 'Update items.json',
@@ -1183,6 +1198,7 @@ async function saveItems(){
     if(res.ok){
       const data = await res.json();
       window._itemsSha = data.content.sha;
+      showToast('✓ Saved to GitHub');
     } else if(res.status === 409){
       // Конфликт — получаем актуальный sha и повторяем
       const check = await ghFetch(GH_ITEMS_PATH);
@@ -1191,10 +1207,27 @@ async function saveItems(){
         window._itemsSha = d.sha;
         body.sha = d.sha;
         const retry = await ghFetch(GH_ITEMS_PATH, 'PUT', body);
-        if(retry.ok){ const rd = await retry.json(); window._itemsSha = rd.content.sha; }
+        if(retry.ok){
+          const rd = await retry.json();
+          window._itemsSha = rd.content.sha;
+          showToast('✓ Saved to GitHub');
+        } else {
+          showToast('❌ GitHub save failed (409) — check token');
+        }
       }
+    } else if(res.status === 401){
+      showToast('❌ Invalid GitHub token — update it below');
+      setGhToken('');
+    } else if(res.status === 403){
+      showToast('❌ Token has no write access — create new token with repo permissions');
+    } else {
+      const err = await res.json().catch(()=>({}));
+      showToast('❌ GitHub error: ' + (err.message || res.status));
     }
-  }catch(e){ console.warn('GitHub save failed:', e); }
+  }catch(e){
+    console.warn('GitHub save failed:', e);
+    showToast('❌ Network error — saved locally only');
+  }
 }
 async function loadUsers(){
   try{
