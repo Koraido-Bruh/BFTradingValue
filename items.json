@@ -427,7 +427,8 @@
     "perm": null,
     "demand": "Medium",
     "trend": "Stable",
-    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Torment_Fruit_1787812858142.png"
+    "image": "https://raw.githubusercontent.com/Koraido-Bruh/BFTradingValue/main/img/Torment_Fruit_1787812858142.png",
+    "autoPrice": true
   },
   {
     "id": "seed-43",
