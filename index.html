@@ -1994,67 +1994,106 @@ document.getElementById('cancelBtn').addEventListener('click', closeModal);
 document.getElementById('saveBtn').addEventListener('click', saveModal);
 document.getElementById('overlay').addEventListener('click', e=>{ if(e.target.id==='overlay') closeModal(); });
 /* =========================================================================
-   AUTO-PRICE SYNC — парсинг цен с game.guide через CORS-прокси
+   AUTO-PRICE SYNC — ручной импорт через буфер обмена
    ========================================================================= */
 const GAME_GUIDE_URL = 'https://www.game.guide/blox-fruits-value-list';
-const CORS_PROXY = 'https://api.allorigins.win/get?url=';
 
-async function fetchGameGuideprices(){
-  showToast('Fetching prices from game.guide…');
-  try{
-    const res = await fetch(CORS_PROXY + encodeURIComponent(GAME_GUIDE_URL));
-    if(!res.ok) throw new Error('Proxy error: ' + res.status);
-    const data = await res.json();
-    const html = data.contents;
-    return parseGameGuidePrices(html);
-  }catch(e){
-    showToast('❌ Failed to fetch: ' + e.message);
-    return null;
+function parseGameGuidePrices(text){
+  const priceMap = {};
+  const lines = text.split('\n');
+  
+  for(let i = 0; i < lines.length; i++){
+    const line = lines[i].trim();
+    if(!line) continue;
+    
+    // Ищем числа с суффиксами B/M/T/K
+    const values = [...line.matchAll(/(\d+(?:\.\d+)?)\s*([BMTKbmtk])\b/g)];
+    if(values.length === 0) continue;
+    
+    // Ищем название — строка без чисел рядом или предыдущая строка
+    let name = '';
+    const nameMatch = line.match(/^([A-Za-z][A-Za-z0-9\s\-'\.]+?)(?:\s+\d|\s*$)/);
+    if(nameMatch) name = nameMatch[1].trim();
+    else if(i > 0) name = lines[i-1].trim().replace(/[^A-Za-z0-9\s\-'\.]/g,'').trim();
+    
+    if(!name || name.length < 2) continue;
+    
+    const toNum = (v, s) => {
+      const n = parseFloat(v);
+      switch(s.toUpperCase()){
+        case 'T': return n * 1e12;
+        case 'B': return n * 1e9;
+        case 'M': return n * 1e6;
+        case 'K': return n * 1e3;
+        default: return n;
+      }
+    };
+    
+    priceMap[name.toLowerCase()] = {
+      normal: values[0] ? toNum(values[0][1], values[0][2]) : null,
+      perm:   values[1] ? toNum(values[1][1], values[1][2]) : null
+    };
   }
-}
-
-function parseGameGuidePrices(html){
-  // Парсим цены из HTML game.guide
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, 'text/html');
-  const priceMap = {}; // name -> {normal, perm}
-
-  // game.guide хранит данные в таблицах или div-ах
-  // Ищем все элементы содержащие название фрукта и цену
-  const rows = doc.querySelectorAll('tr, .value-row, [class*="fruit"], [class*="item"]');
-  rows.forEach(row => {
-    const text = row.textContent;
-    // Ищем паттерн: название и числа типа 4.5B, 1.2T
-    const nameMatch = text.match(/([A-Za-z][A-Za-z\s\-']+)/);
-    const values = [...text.matchAll(/(\d+(?:\.\d+)?)\s*([BMTKbmtk])/g)];
-    if(nameMatch && values.length > 0){
-      const name = nameMatch[1].trim();
-      const toNum = (v, suffix) => {
-        const n = parseFloat(v);
-        if(suffix.toLowerCase()==='t') return n * 1e12;
-        if(suffix.toLowerCase()==='b') return n * 1e9;
-        if(suffix.toLowerCase()==='m') return n * 1e6;
-        if(suffix.toLowerCase()==='k') return n * 1e3;
-        return n;
-      };
-      priceMap[name.toLowerCase()] = {
-        normal: values[0] ? toNum(values[0][1], values[0][2]) : null,
-        perm: values[1] ? toNum(values[1][1], values[1][2]) : null
-      };
-    }
-  });
   return priceMap;
 }
 
 function findBestMatch(itemName, priceMap){
-  const nameLower = itemName.toLowerCase();
-  // Точное совпадение
+  const nameLower = itemName.toLowerCase().trim();
   if(priceMap[nameLower]) return priceMap[nameLower];
   // Частичное совпадение
   for(const [key, val] of Object.entries(priceMap)){
     if(key.includes(nameLower) || nameLower.includes(key)) return val;
   }
   return null;
+}
+
+async function fetchGameGuideprices(){
+  return new Promise((resolve) => {
+    // Открываем диалог с инструкцией
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `position:fixed;inset:0;background:rgba(4,4,12,0.95);z-index:9999;
+      display:flex;align-items:center;justify-content:center;padding:20px;`;
+    
+    overlay.innerHTML = `
+      <div style="background:var(--surface);border:1px solid var(--neon);border-radius:10px;
+        padding:28px;max-width:520px;width:100%;box-shadow:var(--glow-neon);">
+        <div style="font-family:'Orbitron',sans-serif;font-size:14px;color:var(--neon-bright);
+          letter-spacing:0.08em;margin-bottom:12px;">⚡ AUTO-SYNC PRICES</div>
+        <ol style="color:var(--ink-dim);font-size:13px;line-height:1.8;margin:0 0 16px;padding-left:20px;">
+          <li>Open <a href="${GAME_GUIDE_URL}" target="_blank" 
+            style="color:var(--cyan);">game.guide/blox-fruits-value-list</a></li>
+          <li>Press <kbd style="background:var(--bg-alt);padding:2px 6px;border-radius:4px;
+            border:1px solid var(--border);font-size:11px;">Ctrl+A</kbd> then 
+            <kbd style="background:var(--bg-alt);padding:2px 6px;border-radius:4px;
+            border:1px solid var(--border);font-size:11px;">Ctrl+C</kbd> to copy all</li>
+          <li>Click the button below and paste</li>
+        </ol>
+        <textarea id="pasteArea" placeholder="Paste page content here (Ctrl+V)…"
+          style="width:100%;height:140px;background:var(--bg-alt);border:1px solid var(--border);
+          border-radius:6px;color:var(--ink);padding:10px;font-size:12px;resize:vertical;
+          font-family:monospace;outline:none;box-sizing:border-box;"></textarea>
+        <div style="display:flex;gap:10px;margin-top:14px;justify-content:flex-end;">
+          <button id="cancelPaste" class="btn btn-sm">Cancel</button>
+          <button id="confirmPaste" class="btn btn-sm btn-primary">Parse & Sync</button>
+        </div>
+      </div>`;
+    
+    document.body.appendChild(overlay);
+    setTimeout(()=>overlay.querySelector('#pasteArea').focus(), 100);
+    
+    overlay.querySelector('#cancelPaste').onclick = () => {
+      document.body.removeChild(overlay);
+      resolve(null);
+    };
+    overlay.querySelector('#confirmPaste').onclick = () => {
+      const text = overlay.querySelector('#pasteArea').value;
+      document.body.removeChild(overlay);
+      if(!text.trim()){ showToast('❌ Nothing pasted'); resolve(null); return; }
+      const result = parseGameGuidePrices(text);
+      showToast(`✓ Parsed ${Object.keys(result).length} entries`);
+      resolve(result);
+    };
+  });
 }
 
 // Авто-синк одного предмета при сохранении
