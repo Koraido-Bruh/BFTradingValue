@@ -823,6 +823,7 @@
   <div class="foot-actions">
     <button class="btn btn-sm" id="resetDataBtn" style="display:none;">Reset to default values</button>
     <button class="btn btn-sm" id="ghTokenBtn" style="display:none;">🔑 GitHub Token</button>
+    <button class="btn btn-sm btn-primary" id="autoPriceAllBtn" style="display:none;">⚡ Auto-sync all prices from game.guide</button>
   </div>
 </footer>
 
@@ -925,6 +926,13 @@
         <label>Permanent value</label>
         <input type="text" id="fPerm" placeholder="e.g. 7.6B (leave blank if none)">
       </div>
+    </div>
+    <div class="field">
+      <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-size:10px; color:var(--neon-bright);">
+        <input type="checkbox" id="fAutoPrice" style="width:14px; height:14px; accent-color:var(--neon);">
+        Auto-sync price from game.guide
+      </label>
+      <small>When enabled, price will be fetched from game.guide automatically on save.</small>
     </div>
     <div class="field">
       <label>Trend</label>
@@ -1396,6 +1404,7 @@ function renderAccountArea(){
   document.getElementById('openAddBtn').style.display = isAdmin() ? 'inline-flex' : 'none';
   document.getElementById('resetDataBtn').style.display = isAdmin() ? 'inline-flex' : 'none';
   document.getElementById('ghTokenBtn').style.display = isAdmin() ? 'inline-flex' : 'none';
+  document.getElementById('autoPriceAllBtn').style.display = isAdmin() ? 'inline-flex' : 'none';
 
   // (mobile login button removed)
 }
@@ -1813,6 +1822,7 @@ function openAdd(){
   document.getElementById('fNormal').value = '';
   document.getElementById('fPerm').value = '';
   document.getElementById('fTrend').value = 'Stable';
+  document.getElementById('fAutoPrice').checked = false;
   document.getElementById('fImageUrl').value = '';
   document.getElementById('fImageFile').value = '';
   updateImgPreview(null);
@@ -1830,6 +1840,7 @@ function openEdit(id){
   document.getElementById('fNormal').value = item.normal===null ? '' : item.normal;
   document.getElementById('fPerm').value = item.perm===null ? '' : item.perm;
   document.getElementById('fTrend').value = item.trend;
+  document.getElementById('fAutoPrice').checked = item.autoPrice || false;
   document.getElementById('fImageUrl').value = item.image && item.image.startsWith('http') ? item.image : '';
   document.getElementById('fImageFile').value = '';
   updateImgPreview(item.image);
@@ -1848,18 +1859,39 @@ async function saveModal(){
   if(!isAdmin()){ showToast('Admin only'); return; }
   const name = document.getElementById('fName').value.trim();
   if(!name){ showToast('Give the item a name first'); return; }
+  const autoPrice = document.getElementById('fAutoPrice').checked;
+
+  let normal = parseValue(document.getElementById('fNormal').value);
+  let perm = parseValue(document.getElementById('fPerm').value);
+
+  // Если включен авто-перенос — получаем цену с game.guide
+  if(autoPrice){
+    showToast('Fetching price from game.guide…');
+    const priceMap = await fetchGameGuideprices();
+    if(priceMap){
+      const match = findBestMatch(name, priceMap);
+      if(match){
+        if(match.normal !== null) normal = match.normal;
+        if(match.perm !== null) perm = match.perm;
+        showToast(`✓ Price synced for "${name}"`);
+      } else {
+        showToast(`⚠ No match for "${name}" on game.guide — using manual value`);
+      }
+    }
+  }
+
   const data = {
     name,
     category: document.getElementById('fCategory').value,
     demand: document.getElementById('fDemand').value,
-    normal: parseValue(document.getElementById('fNormal').value),
-    perm: parseValue(document.getElementById('fPerm').value),
+    normal,
+    perm,
     trend: document.getElementById('fTrend').value,
     image: currentImageData,
+    autoPrice,
   };
   if(editingId){
     const item = items.find(i=>i.id===editingId);
-    // log price changes
     if(item.normal !== data.normal) logPriceChange(name, item.normal, data.normal);
     Object.assign(item, data);
     showToast(`Updated "${name}"`);
@@ -1961,7 +1993,111 @@ document.getElementById('openAddBtn').addEventListener('click', openAdd);
 document.getElementById('cancelBtn').addEventListener('click', closeModal);
 document.getElementById('saveBtn').addEventListener('click', saveModal);
 document.getElementById('overlay').addEventListener('click', e=>{ if(e.target.id==='overlay') closeModal(); });
-document.getElementById('resetDataBtn').addEventListener('click', resetData);
+/* =========================================================================
+   AUTO-PRICE SYNC — парсинг цен с game.guide через CORS-прокси
+   ========================================================================= */
+const GAME_GUIDE_URL = 'https://www.game.guide/blox-fruits-value-list';
+const CORS_PROXY = 'https://api.allorigins.win/get?url=';
+
+async function fetchGameGuideprices(){
+  showToast('Fetching prices from game.guide…');
+  try{
+    const res = await fetch(CORS_PROXY + encodeURIComponent(GAME_GUIDE_URL));
+    if(!res.ok) throw new Error('Proxy error: ' + res.status);
+    const data = await res.json();
+    const html = data.contents;
+    return parseGameGuidePrices(html);
+  }catch(e){
+    showToast('❌ Failed to fetch: ' + e.message);
+    return null;
+  }
+}
+
+function parseGameGuidePrices(html){
+  // Парсим цены из HTML game.guide
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+  const priceMap = {}; // name -> {normal, perm}
+
+  // game.guide хранит данные в таблицах или div-ах
+  // Ищем все элементы содержащие название фрукта и цену
+  const rows = doc.querySelectorAll('tr, .value-row, [class*="fruit"], [class*="item"]');
+  rows.forEach(row => {
+    const text = row.textContent;
+    // Ищем паттерн: название и числа типа 4.5B, 1.2T
+    const nameMatch = text.match(/([A-Za-z][A-Za-z\s\-']+)/);
+    const values = [...text.matchAll(/(\d+(?:\.\d+)?)\s*([BMTKbmtk])/g)];
+    if(nameMatch && values.length > 0){
+      const name = nameMatch[1].trim();
+      const toNum = (v, suffix) => {
+        const n = parseFloat(v);
+        if(suffix.toLowerCase()==='t') return n * 1e12;
+        if(suffix.toLowerCase()==='b') return n * 1e9;
+        if(suffix.toLowerCase()==='m') return n * 1e6;
+        if(suffix.toLowerCase()==='k') return n * 1e3;
+        return n;
+      };
+      priceMap[name.toLowerCase()] = {
+        normal: values[0] ? toNum(values[0][1], values[0][2]) : null,
+        perm: values[1] ? toNum(values[1][1], values[1][2]) : null
+      };
+    }
+  });
+  return priceMap;
+}
+
+function findBestMatch(itemName, priceMap){
+  const nameLower = itemName.toLowerCase();
+  // Точное совпадение
+  if(priceMap[nameLower]) return priceMap[nameLower];
+  // Частичное совпадение
+  for(const [key, val] of Object.entries(priceMap)){
+    if(key.includes(nameLower) || nameLower.includes(key)) return val;
+  }
+  return null;
+}
+
+// Авто-синк одного предмета при сохранении
+async function applyAutoPriceIfNeeded(itemName, currentNormal, currentPerm){
+  const priceMap = await fetchGameGuideprices();
+  if(!priceMap) return {normal: currentNormal, perm: currentPerm};
+  const match = findBestMatch(itemName, priceMap);
+  if(!match){
+    showToast(`⚠ No match found for "${itemName}" on game.guide`);
+    return {normal: currentNormal, perm: currentPerm};
+  }
+  return {
+    normal: match.normal ?? currentNormal,
+    perm: match.perm ?? currentPerm
+  };
+}
+
+// Авто-синк ВСЕХ предметов
+document.getElementById('autoPriceAllBtn').addEventListener('click', async ()=>{
+  if(!confirm('This will overwrite ALL prices with data from game.guide. Continue?')) return;
+  const priceMap = await fetchGameGuideprices();
+  if(!priceMap){ showToast('❌ Could not fetch prices'); return; }
+
+  let updated = 0;
+  items.forEach(item => {
+    if(item.autoPrice){
+      const match = findBestMatch(item.name, priceMap);
+      if(match){
+        if(match.normal !== null) { logPriceChange(item.name, item.normal, match.normal); item.normal = match.normal; }
+        if(match.perm !== null) item.perm = match.perm;
+        updated++;
+      }
+    }
+  });
+
+  if(updated === 0){
+    showToast('⚠ No items have auto-sync enabled. Edit items to enable it.');
+  } else {
+    await saveItems();
+    renderAll();
+    showToast(`✓ Updated ${updated} items from game.guide`);
+  }
+});
 document.getElementById('ghTokenBtn').addEventListener('click', ()=>{
   const current = getGhToken();
   const msg = current
